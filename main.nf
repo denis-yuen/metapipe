@@ -17,11 +17,13 @@ log.info """\
 // import modules
 include {PreProcessReads} from './nextflow/Assembly/modules/PreProcessReads.nf'
 include {Seqprep} from './nextflow/Assembly/modules/Seqprep.nf'
+include {TrimmomaticSE} from './nextflow/Assembly/modules/TrimmomaticSE.nf'
 
  workflow {
    reads = '../test/default-it/src/test/resources/datasets/default_reads_fastq'
    read_pairs_ch = Channel.fromPath( reads + '/*.fastq*', checkIfExists: true ) | collect | view
    PreProcessReads(read_pairs_ch) | flatMap | Seqprep
+   TrimmomaticSE(Seqprep.out.merged)
  }
 
  /*

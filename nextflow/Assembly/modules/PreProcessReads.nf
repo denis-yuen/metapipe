@@ -15,7 +15,6 @@ process PreProcessReads {
     '''
     set +u
     SLICES=!{params.PreProcessReads_slices}
-    MK_MEM_BYTES='1G'
     FORWARD=($(find inputDir -name "forward.fastq*" -type f -or -type l))
     if [[ -n $FORWARD ]]; then
       R1_PARAM="--r1 $FORWARD"
