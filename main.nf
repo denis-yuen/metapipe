@@ -17,13 +17,19 @@ log.info """\
 // import modules
 include {PreProcessReads} from './nextflow/Assembly/modules/PreProcessReads.nf'
 include {Seqprep} from './nextflow/Assembly/modules/Seqprep.nf'
-include {TrimmomaticSE} from './nextflow/Assembly/modules/TrimmomaticSE.nf'
+include {TrimmomaticSE; TrimmomaticPE} from './nextflow/Assembly/modules/Trimmomatic.nf'
+include {Rrnapred} from './nextflow/Assembly/modules/Rrnapred.nf'
 
  workflow {
    reads = '../test/default-it/src/test/resources/datasets/default_reads_fastq'
-   read_pairs_ch = Channel.fromPath( reads + '/*.fastq*', checkIfExists: true ) | collect | view
+   read_pairs_ch = Channel.fromPath( reads + '/*.fastq*', checkIfExists: true ) | collect
    PreProcessReads(read_pairs_ch) | flatMap | Seqprep
-   TrimmomaticSE(Seqprep.out.merged)
+   merged_ch = Seqprep.out.merged.collectFile(name: 'merged.fastq.gz')
+   unmergedR1_ch = Seqprep.out.slicesR1.collectFile(name: 'unmergedR1.fastq.gz')
+   unmergedR2_ch = Seqprep.out.slicesR2.collectFile(name: 'unmergedR2.fastq.gz')
+   TrimmomaticSE(merged_ch)
+   TrimmomaticPE(unmergedR1_ch, unmergedR2_ch)
+   TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2) | view
  }
 
  /*
