@@ -16,13 +16,12 @@ log.info """\
 
 // import modules
 include {PreProcessReads} from './nextflow/Assembly/modules/PreProcessReads.nf'
-
-"/mnt/c/Users/mayeu/git/metapipe/test/default-it/src/test/resources/datasets/default_reads_fastq"
+include {Seqprep} from './nextflow/Assembly/modules/Seqprep.nf'
 
  workflow {
-   reads = '/mnt/c/Users/mayeu/git/metapipe/test/default-it/src/test/resources/datasets/default_reads_fastq'
+   reads = '../test/default-it/src/test/resources/datasets/default_reads_fastq'
    read_pairs_ch = Channel.fromPath( reads + '/*.fastq*', checkIfExists: true ) | collect | view
-   PreProcessReads(read_pairs_ch)
+   PreProcessReads(read_pairs_ch) | flatMap | Seqprep
  }
 
  /*

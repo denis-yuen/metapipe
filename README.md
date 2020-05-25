@@ -51,6 +51,6 @@ nextflow run gitlab.com/uit-sfb/metapipe
 
 Clone the repo, then:
 ```bash
-mkdir -d target && cd target
-nextflow run ..
+mkdir -p target && cd target
+nextflow run [-resume] ..
 ```
