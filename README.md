@@ -1,6 +1,6 @@
 # Metapipe
 
-[Metapipe](https://https://gitlab.com/uit-sfb/metapipe) is a workflow for analysis and annotation of metagenomic samples,
+[Metapipe](https://gitlab.com/uit-sfb/metapipe) is a workflow for analysis and annotation of metagenomic samples,
 providing insight into phylogenetic diversity, as well as metabolic and functional properties of environmental communities.
 
 As illustrated in the diagram below, the workflow is divided into four modules:
@@ -31,4 +31,26 @@ todo
 
 ## Getting started
 
-todo
+### Requirements
+
+https://www.nextflow.io/docs/latest/getstarted.html#requirements
+
+### Installing Nextflow
+
+https://www.nextflow.io/docs/latest/getstarted.html#installation
+
+### Executing the workflow
+
+```bash
+#Optional, only to fetch changes from repository
+nextflow pull gitlab.com/uit-sfb/metapipe
+nextflow run gitlab.com/uit-sfb/metapipe
+```
+
+### Debugging
+
+Clone the repo, then:
+```bash
+mkdir -d target && cd target
+nextflow run ..
+```

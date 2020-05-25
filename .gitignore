@@ -1,4 +1,6 @@
 **/.idea/
 *.iml
 **/target/
-.version
+**/work/
+**/.nexflow/
+.nextflow.log*

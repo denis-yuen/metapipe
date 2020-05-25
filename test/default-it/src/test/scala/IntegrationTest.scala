@@ -119,7 +119,7 @@ class IntegrationTest extends FunSpec with Matchers with LazyLogging {
            |-v ${Paths.get(System.getProperty("user.dir"))}/src/test/resources:/data/resources:ro
            |registry.gitlab.com/uit-sfb/metakube/mkadm:$metakubeVersion --
            |analysis submit --config /data/resources/job.yaml --pachd $ip:30650
-           |illumina/forward=/data/resources/datasets/default_reads_fastq/R1_250000.fastq.gz,illumina/reverse=/data/resources/datasets/default_reads_fastq/R2_unordered.fastq.gz
+           |illumina/forward=/data/resources/datasets/default_reads_fastq/forward.fastq.gz,illumina/reverse=/data/resources/datasets/default_reads_fastq/reverse.fastq.gz
            |""".stripMargin.replace("\n", " ")
       ).execF(_.last, true)
     }
