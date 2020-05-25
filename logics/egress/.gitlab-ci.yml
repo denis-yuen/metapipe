@@ -1,0 +1,16 @@
+docker egress publish:
+  stage: build
+  tags:
+    - test-server
+    - bash
+
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{egress}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logics}.*/
+
+  before_script:
+    - VERSION=$(cat .version)
+
+  script:
+    - cd logics/egress
+    - sbt clean test docker:publish

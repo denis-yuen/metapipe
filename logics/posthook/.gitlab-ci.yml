@@ -1,0 +1,16 @@
+docker postHook publish:
+  stage: build
+  tags:
+    - test-server
+    - bash
+
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logics}.*/ && $CI_COMMIT_MESSAGE !~ /.*{posthook}.*/
+
+  script:
+    - VERSION=$(cat .version)
+    - cd logics/posthook
+    - IMAGE_NAME=metapipe-$(basename $(pwd))
+    - docker build -t $REGISTRY/$IMAGE_NAME:${VERSION} .
+    - docker push $REGISTRY/$IMAGE_NAME:${VERSION}
