@@ -6,12 +6,12 @@ nextflow.preview.dsl = 2
  * Default pipeline parameters. They can be overriden on the command line eg.
  * given `params.foo` specify on the run command line `--foo some_value`.
  */
-params.PreProcessReads_slices = 4
+params.reads = '../test/default-it/src/test/resources/datasets/default_reads_fastq'
 
 log.info """\
  M E T A P I P E
  ===================================
- slices: ${params.PreProcessReads_slices}
+ reads: ${params.reads}
  """
 
 // import modules
@@ -21,15 +21,14 @@ include {TrimmomaticSE; TrimmomaticPE} from './nextflow/Assembly/modules/Trimmom
 include {Rrnapred} from './nextflow/Assembly/modules/Rrnapred.nf'
 
  workflow {
-   reads = '../test/default-it/src/test/resources/datasets/default_reads_fastq'
-   read_pairs_ch = Channel.fromPath( reads + '/*.fastq*', checkIfExists: true ) | collect
-   PreProcessReads(read_pairs_ch) | flatMap | Seqprep
-   merged_ch = Seqprep.out.merged.collectFile(name: 'merged.fastq.gz')
-   unmergedR1_ch = Seqprep.out.slicesR1.collectFile(name: 'unmergedR1.fastq.gz')
-   unmergedR2_ch = Seqprep.out.slicesR2.collectFile(name: 'unmergedR2.fastq.gz')
+   read_pairs_ch = Channel.fromPath( params.reads + '/*.fastq*', checkIfExists: true ) | collect
+   PreProcessReads(read_pairs_ch) | flatten | map { path -> tuple(path.baseName, path) } | Seqprep
+   merged_ch = Seqprep.out.merged.collectFile(name: 'merged.fastq.gz', sort: {it.parent.baseName})
+   unmergedR1_ch = Seqprep.out.unmergedR1.collectFile(name: 'unmergedR1.fastq.gz', sort: {it.parent.baseName})
+   unmergedR2_ch = Seqprep.out.unmergedR2.collectFile(name: 'unmergedR2.fastq.gz', sort: {it.parent.baseName})
    TrimmomaticSE(merged_ch)
    TrimmomaticPE(unmergedR1_ch, unmergedR2_ch)
-   TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2) | view
+   TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2).map{ path -> tuple(path.simpleName, path) } | Rrnapred
  }
 
  /*

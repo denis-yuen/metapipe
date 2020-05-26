@@ -1,7 +1,7 @@
 params.Trimmomatic_readsCutoff = 75
 
 process TrimmomaticSE {
-  echo true
+  //echo true
 
   container 'mk-trimmomatic:0.39'
 
@@ -24,13 +24,13 @@ process TrimmomaticSE {
 }
 
 process TrimmomaticPE {
-  echo true
+  //echo true
 
   container 'mk-trimmomatic:0.39'
 
   input:
-    path 'inputDir/*'
-    path 'inputDir/*'
+    path 'inputDir/unmergedR1.fastq.gz'
+    path 'inputDir/unmergedR2.fastq.gz'
 
   output:
     path 'out/data/unmerged_r1.fastq.gz', emit: unmergedR1

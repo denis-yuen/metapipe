@@ -1,7 +1,7 @@
 params.PreProcessReads_slices = 4
 
 process PreProcessReads {
-  echo true
+  //echo true
 
   container 'mk-preprocess-reads:1.0.0-SNAPSHOT'
 
