@@ -20,6 +20,7 @@ include {Seqprep} from './nextflow/Assembly/modules/Seqprep.nf'
 include {TrimmomaticSE; TrimmomaticPE} from './nextflow/Assembly/modules/Trimmomatic.nf'
 include {Rrnapred} from './nextflow/Assembly/modules/Rrnapred.nf'
 include {PairReads} from './nextflow/Assembly/modules/PairReads.nf'
+include {Megahit} from './nextflow/Assembly/modules/Megahit.nf'
 
  workflow {
    read_pairs_ch = Channel.fromPath( params.reads + '/*.fastq*', checkIfExists: true ) | collect
@@ -31,6 +32,7 @@ include {PairReads} from './nextflow/Assembly/modules/PairReads.nf'
    TrimmomaticPE(unmergedR1_ch, unmergedR2_ch)
    TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2).map{ path -> tuple(path.simpleName, path) } | Rrnapred
    PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
+   Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
  }
 
  /*
