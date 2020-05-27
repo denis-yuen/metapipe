@@ -1,4 +1,4 @@
-package no.uit.sfb.stages.preoprocessreads
+package no.uit.sfb.metapipe.preoprocessreads
 
 import java.io.{BufferedOutputStream, FileOutputStream, OutputStreamWriter}
 import java.nio.file.Path

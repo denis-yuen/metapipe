@@ -1,8 +1,8 @@
-package no.uit.sfb.stages.preoprocessreads
+package no.uit.sfb.metapipe.preoprocessreads
 
 import java.io.File
 
-import no.uit.sfb.info.metapipe_preprocess_reads.BuildInfo
+import no.uit.sfb.info.preprocess_reads.BuildInfo
 import scopt.OParser
 
 object Main extends App {

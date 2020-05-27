@@ -30,7 +30,7 @@ libraryDependencies ++= Seq(
 enablePlugins(JavaAppPackaging, DockerPlugin)
 
 dockerRepository in Docker := Some("registry.gitlab.com")
-dockerUsername in Docker := Some("uit-sfb/mk-metapipe-logic")
+dockerUsername in Docker := Some("uit-sfb/metapipe")
 dockerAlias := {
   dockerAlias.value.copy(tag = Some(s"${version.value}"))
 }
