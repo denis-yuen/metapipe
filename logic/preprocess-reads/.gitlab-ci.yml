@@ -8,6 +8,9 @@ preprocess-reads build:
     variables:
       - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{preprocess-reads}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logic}.*/
 
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTR_USER --password-stdin $CI_REGISTRY
+
   script:
     - cd logic/preprocess-reads
     - sbt clean test docker:publish
