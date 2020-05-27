@@ -35,6 +35,8 @@ todo
 
 https://www.nextflow.io/docs/latest/getstarted.html#requirements
 
+Note: Any Docker image must contain bash.
+
 ### Installing Nextflow
 
 https://www.nextflow.io/docs/latest/getstarted.html#installation

@@ -9,7 +9,7 @@ process TrimmomaticSE {
     path 'inputDir/*'
 
   output:
-    path 'out/data/merged.fastq.gz', emit: merged
+    path 'out/merged.fastq.gz', emit: merged
 
   shell:
     '''
@@ -19,7 +19,7 @@ process TrimmomaticSE {
       XMX_FLAG="-Xmx$MK_MEM_LIMIT_BYTES"
     fi
     mkdir -p out
-    java -Xms$MK_MEM_BYTES $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar -- \
+    java -Xms$MK_MEM_BYTES $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar \
       SE -threads $MK_CPU_INT -phred33 inputDir/merged.fastq.gz out/merged.fastq.gz AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:$READS_CUTOFF
     '''
 }
@@ -34,8 +34,8 @@ process TrimmomaticPE {
     path 'inputDir/unmergedR2.fastq.gz'
 
   output:
-    path 'out/data/unmerged_r1.fastq.gz', emit: unmergedR1
-    path 'out/data/unmerged_r2.fastq.gz', emit: unmergedR2
+    path 'out/unmerged_r1.fastq.gz', emit: unmergedR1
+    path 'out/unmerged_r2.fastq.gz', emit: unmergedR2
 
   shell:
     '''
@@ -45,7 +45,7 @@ process TrimmomaticPE {
       XMX_FLAG="-Xmx$MK_MEM_LIMIT_BYTES"
     fi
     mkdir -p out
-    java -Xms$MK_MEM_BYTES $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar -- \
+    java -Xms$MK_MEM_BYTES $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar \
       PE -threads $MK_CPU_INT -phred33 inputDir/unmergedR1.fastq.gz inputDir/unmergedR2.fastq.gz \
       out/unmerged_r1.fastq.gz /dev/null out/unmerged_r2.fastq.gz /dev/null AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:$READS_CUTOFF
     '''

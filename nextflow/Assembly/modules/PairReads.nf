@@ -1,15 +1,15 @@
 process PairReads {
   //echo true
 
-  container 'registry.gitlab.com/uit-sfb/metapipe/preprocess-reads:0.1.0-SNAPSHOT'
+  container 'preprocess-reads:0.1.0-SNAPSHOT'
 
   input:
     path inputR1, stageAs: 'inputDir/r1/*'
     path inputR2, stageAs: 'inputDir/r2/*'
 
   output:
-    path 'out/data/r1.fastq.gz', emit: r1
-    path 'out/data/r2.fastq.gz', emit: r2
+    path 'out/r1.fastq.gz', emit: r1
+    path 'out/r2.fastq.gz', emit: r2
 
   shell:
     '''

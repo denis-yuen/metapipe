@@ -6,4 +6,5 @@ test full1:
 
   script:
     - mkdir -p target && cd target
-    - nexflow run ..
+    - nextflow run ..
+    #- docker run --rm -v ..:/workflow -v /var/run/docker.sock:/var/run/docker.sock nextflow/nextflow:20.04.1 nextflow run /workflow

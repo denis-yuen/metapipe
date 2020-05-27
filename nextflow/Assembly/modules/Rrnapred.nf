@@ -1,18 +1,18 @@
 process Rrnapred {
   //echo true
 
-  container 'registry.gitlab.com/uit-sfb/metapipe/rrnapred:0.1.0-SNAPSHOT'
+  container 'rrnapred:0.1.0-SNAPSHOT'
 
   input:
     tuple FILENAME, path(input, stageAs: 'inputDir/*')
 
   output:
-    path 'out/data/merged/filtered.fastq.gz', emit: merged_filtered, optional: true
-    path 'out/data/merged/pred16s.fasta', emit: merged_pred16s, optional: true
-    path 'out/data/unmerged_r1/filtered.fastq.gz', emit: unmergedR1_filtered, optional: true
-    path 'out/data/unmerged_r1/pred16s.fasta', emit: unmergedR1_pred16s, optional: true
-    path 'out/data/unmerged_r2/filtered.fastq.gz', emit: unmergedR2_filtered, optional: true
-    path 'out/data/unmerged_r2/pred16s.fasta', emit: unmergedR2_pred16s, optional: true
+    path 'out/merged/filtered.fastq.gz', emit: merged_filtered, optional: true
+    path 'out/merged/pred16s.fasta', emit: merged_pred16s, optional: true
+    path 'out/unmerged_r1/filtered.fastq.gz', emit: unmergedR1_filtered, optional: true
+    path 'out/unmerged_r1/pred16s.fasta', emit: unmergedR1_pred16s, optional: true
+    path 'out/unmerged_r2/filtered.fastq.gz', emit: unmergedR2_filtered, optional: true
+    path 'out/unmerged_r2/pred16s.fasta', emit: unmergedR2_pred16s, optional: true
 
   shell:
     '''

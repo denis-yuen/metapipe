@@ -11,7 +11,7 @@ process Megahit {
     path inputMerged, stageAs: 'inputDir/*'
 
   output:
-    path 'out/data/contigs.fasta', emit: contigs
+    path 'out/contigs.fasta', emit: contigs
 
   shell:
     '''
