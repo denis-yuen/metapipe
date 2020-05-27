@@ -3,7 +3,7 @@ params.PreProcessReads_slices = 4
 process PreProcessReads {
   //echo true
 
-  container 'mk-preprocess-reads:1.0.0-SNAPSHOT'
+  container 'registry.gitlab.com/uit-sfb/metapipe/preprocess-reads:0.1.0-SNAPSHOT'
 
   input:
     path 'inputDir/*'
@@ -30,6 +30,7 @@ process PreProcessReads {
     if [[ -n $MK_MEM_LIMIT_BYTES ]]; then
       XMX_FLAG="-J-Xmx$MK_MEM_LIMIT_BYTES"
     fi
-    $MK_APP -J-Xms$MK_MEM_BYTES $XMX_FLAG -- $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir $MK_OUT/slices --tmpDir $MK_TMP --slices $SLICES
+    /opt/docker/bin/metapipe-preprocess-reads -J-Xms$MK_MEM_BYTES $XMX_FLAG -- \
+      $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices $SLICES
     '''
 }

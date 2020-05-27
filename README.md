@@ -52,5 +52,21 @@ nextflow run gitlab.com/uit-sfb/metapipe
 Clone the repo, then:
 ```bash
 mkdir -p target && cd target
-nextflow run [-resume] ..
+nextflow run [-resume] .. [logging/mail options]
 ```
+
+### Logging
+
+https://nextflow.io/docs/latest/tracing.html
+
+  - `-with-report` to generate an html report
+  - `-with-trace` to generate a trace (text)
+  - `-with-timeline` to generate an html timeline
+  - `-with-dag dag.html` to generate an html DAG
+  - `-with-weblog <url>` POSTs to specified url metadata and traces a start and completion of job
+
+### Mail
+
+https://nextflow.io/docs/latest/mail.html
+
+`-N <email_address>`

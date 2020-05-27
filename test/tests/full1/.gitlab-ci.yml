@@ -1,0 +1,9 @@
+test full1:
+  stage: test
+  tags:
+    - test-server
+    - bash
+
+  script:
+    - mkdir -p target && cd target
+    - nexflow run ..

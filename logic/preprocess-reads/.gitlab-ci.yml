@@ -1,4 +1,4 @@
-docker preprocess-reads publish:
+preprocess-reads build:
   stage: build
   tags:
     - test-server
@@ -6,11 +6,8 @@ docker preprocess-reads publish:
 
   except:
     variables:
-      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{preprocess-reads}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logics}.*/
-
-  before_script:
-    - VERSION=$(cat .version)
+      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{preprocess-reads}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logic}.*/
 
   script:
-    - cd logics/preprocess-reads
+    - cd logic/preprocess-reads
     - sbt clean test docker:publish

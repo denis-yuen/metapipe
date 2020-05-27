@@ -1,7 +1,7 @@
 process Seqprep {
   //echo true
 
-  container 'mk-seqprep:1.3.2'
+  container 'registry.gitlab.com/uit-sfb/genomic-tools/seqprep:1.3.2'
 
   input:
     tuple DATUM, path(input, stageAs: 'inputDir/*')
@@ -14,14 +14,13 @@ process Seqprep {
   shell:
     '''
     set +u
-    OUT_DIR="$MK_OUT/slices/!{DATUM}"
+    OUT_DIR="out/slices/!{DATUM}"
     mkdir -p "$OUT_DIR" #seqprep requires output dir to exist
-    $MK_APP \
+    /app/seqprep/SeqPrep \
       -f !{input}/r1.fastq.gz \
       -r !{input}/r2.fastq.gz \
       -1 "$OUT_DIR/unmerged_r1.fastq.gz" \
       -2 "$OUT_DIR/unmerged_r2.fastq.gz" \
-      -s "$OUT_DIR/merged.fastq.gz" \
-      2>&1
+      -s "$OUT_DIR/merged.fastq.gz"
     '''
 }

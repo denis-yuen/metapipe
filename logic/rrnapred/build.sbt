@@ -1,4 +1,4 @@
-name := "metapipe-rrnapred"
+name := "rrnapred"
 scalaVersion := "2.12.8"
 organization := "no.uit.sfb"
 organizationName := "SfB"

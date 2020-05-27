@@ -1,4 +1,4 @@
-name := "metapipe-preprocess-reads"
+name := "preprocess-reads"
 scalaVersion := "2.12.8"
 organization := "no.uit.sfb"
 organizationName := "SfB"

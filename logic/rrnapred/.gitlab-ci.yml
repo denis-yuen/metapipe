@@ -1,4 +1,4 @@
-docker rrnapred publish:
+rrnapred build:
   stage: build
   tags:
     - test-server
@@ -6,11 +6,8 @@ docker rrnapred publish:
 
   except:
     variables:
-      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{rrnapred}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logics}.*/
-
-  before_script:
-    - VERSION=$(cat .version)
+      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{rrnapred}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logic}.*/
 
   script:
-    - cd logics/rrnapred
+    - cd logic/rrnapred
     - sbt clean test docker:publish

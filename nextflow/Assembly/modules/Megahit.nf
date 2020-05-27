@@ -3,7 +3,7 @@ params.Megahit_contigsCutoff = 1000
 process Megahit {
   //echo true
 
-  container 'mk-megahit:1.2.9'
+  container 'registry.gitlab.com/uit-sfb/genomic-tools/megahit:1.2.9'
 
   input:
     path inputR1, stageAs: 'inputDir/*'
@@ -16,20 +16,19 @@ process Megahit {
   shell:
     '''
     set +u
-    mkdir -p "$MK_OUT"
+    mkdir -p out
     CONTIGS_CUTOFF=!{params.Megahit_contigsCutoff}
-    #Note: -o must not exist. That is why we use -o $MK_TMP/temp
-    $MK_APP -1 !{inputR1} -2 !{inputR2} -r !{inputMerged} -o $MK_TMP/temp \
+    #Note: -o must not exist. That is why we use -o /tmp/temp
+    /app/megahit/bin/megahit -1 !{inputR1} -2 !{inputR2} -r !{inputMerged} -o /tmp/temp \
       --min-contig-len $CONTIGS_CUTOFF \
-      -t $MK_CPU_INT -m $MK_MEM_BYTES \
-      2>&1
+      -t $MK_CPU_INT -m $MK_MEM_BYTES
     RES=$?
-    cat "$MK_TMP/temp/options.json" && echo
+    cat /tmp/temp/options.json && echo
     if [[ $RES == 0 ]]; then
       #For some reason, symbolic links are not visible as outputs
-      cp "$MK_TMP/temp/final.contigs.fa" "$MK_OUT/contigs.fasta"
+      cp /tmp/temp/final.contigs.fa out/contigs.fasta
     else
-      cat "$MK_TMP/temp/log";
+      cat /tmp/temp/log;
       exit $RES;
     fi
     '''

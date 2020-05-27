@@ -1,1 +1,0 @@
-FROM byrnedo/alpine-curl

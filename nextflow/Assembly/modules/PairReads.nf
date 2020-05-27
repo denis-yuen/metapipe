@@ -1,7 +1,7 @@
 process PairReads {
   //echo true
 
-  container 'mk-preprocess-reads:1.0.0-SNAPSHOT'
+  container 'registry.gitlab.com/uit-sfb/metapipe/preprocess-reads:0.1.0-SNAPSHOT'
 
   input:
     path inputR1, stageAs: 'inputDir/r1/*'
@@ -14,8 +14,7 @@ process PairReads {
   shell:
     '''
     set +u
-    $MK_APP -J-Xms$MK_MEM_BYTES -J-Xmx$MK_MEM_LIMIT_BYTES -- \
-      --r1 !{inputR1} --r2 !{inputR2} --outputDir $MK_OUT --tmpDir $MK_TMP/tmp --slices 0 \
-      2>&1
+    /opt/docker/bin/preprocess-reads -J-Xms$MK_MEM_BYTES -J-Xmx$MK_MEM_LIMIT_BYTES -- \
+      --r1 !{inputR1} --r2 !{inputR2} --outputDir out --tmpDir /tmp/temp --slices 0
     '''
 }

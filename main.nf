@@ -3,12 +3,12 @@
 nextflow.preview.dsl = 2
 
 /*
- * Default pipeline parameters. They can be overriden on the command line eg.
+ * Default pipeline parameters. They can be overridden on the command line eg.
  * given `params.foo` specify on the run command line `--foo some_value`.
  */
-params.reads = '../test/default-it/src/test/resources/datasets/default_reads_fastq'
+params.reads = "$baseDir/test/resources/datasets/default_reads_fastq"
 
-log.info """\
+log.info """
  M E T A P I P E
  ===================================
  reads: ${params.reads}
