@@ -3,7 +3,7 @@ package no.uit.sfb
 import java.nio.file.Paths
 
 import no.uit.sfb.scalautils.common.FileUtils
-import no.uit.sfb.stages.preoprocessreads.{Config, Logic}
+import no.uit.sfb.metapipe.preoprocessreads.{Config, Logic}
 import org.scalatest.{FunSpec, Matchers}
 
 class InterleavedTest extends FunSpec with Matchers {

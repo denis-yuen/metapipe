@@ -1,8 +1,8 @@
-package no.uit.sfb.stages.rrnapred
+package no.uit.sfb.metapipe.rrnapred
 
 import java.io.File
 
-import no.uit.sfb.info.metapipe_rrnapred.BuildInfo
+import no.uit.sfb.info.rrnapred.BuildInfo
 import scopt.OParser
 
 object Main extends App {

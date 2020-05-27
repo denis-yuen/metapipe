@@ -1,4 +1,4 @@
-package no.uit.sfb.stages.rrnapred
+package no.uit.sfb.metapipe.rrnapred
 
 import java.io.{BufferedWriter, FileOutputStream, OutputStreamWriter}
 import java.nio.file.{Path, Paths}
