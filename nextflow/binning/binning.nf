@@ -1,7 +1,8 @@
 #!/usr/bin/env nextflow
 
 // import modules
-include {Bbwrap} from './modules/bbwrap.nf'
+include {BbWrap} from './modules/bbwrap.nf'
+include {BbPileup} from './modules/bbpileup.nf'
 
 workflow Binning {
   take:
@@ -10,7 +11,8 @@ workflow Binning {
     trimmedR1
     trimmedR2
   main:
-    Bbwrap(contigs, trimmedMerged, trimmedR1, trimmedR2)
+    BbWrap(contigs, trimmedMerged, trimmedR1, trimmedR2)
+    BbPileup(BbWrap.out.alignment)
   //emit:
   //  xx = yyy
 }
