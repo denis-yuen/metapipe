@@ -1,12 +1,12 @@
 #!/usr/bin/env nextflow
 
 // import modules
-include {PreProcessReads} from './modules/PreProcessReads.nf'
-include {Seqprep} from './modules/Seqprep.nf'
-include {TrimmomaticSE; TrimmomaticPE} from './modules/Trimmomatic.nf'
-include {Rrnapred} from './modules/Rrnapred.nf'
-include {PairReads} from './modules/PairReads.nf'
-include {Megahit} from './modules/Megahit.nf'
+include {PreProcessReads} from './modules/preProcessReads.nf'
+include {Seqprep} from './modules/seqprep.nf'
+include {TrimmomaticSE; TrimmomaticPE} from './modules/trimmomatic.nf'
+include {Rrnapred} from './modules/rrnapred.nf'
+include {PairReads} from './modules/pairReads.nf'
+include {Megahit} from './modules/megahit.nf'
 
 workflow Assembly {
   take:
@@ -22,5 +22,8 @@ workflow Assembly {
     PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
     Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
   emit:
+    trimmedMerged = TrimmomaticSE.out.merged
+    trimmedR1 = TrimmomaticPE.out.unmergedR1
+    trimmedR2 = TrimmomaticPE.out.unmergedR2
     contigs = Megahit.out.contigs
 }
