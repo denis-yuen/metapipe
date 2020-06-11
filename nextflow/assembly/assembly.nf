@@ -19,7 +19,7 @@ workflow Assembly {
     TrimmomaticSE(merged_ch)
     TrimmomaticPE(unmergedR1_ch, unmergedR2_ch)
     TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2).map{ path -> tuple(path.simpleName, path) } | Rrnapred
-    PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
+    //PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
     //Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
   emit:
     trimmedMerged = TrimmomaticSE.out.merged
