@@ -7,4 +7,4 @@ test full1:
   script:
     - mkdir -p target && cd target
     - nextflow run ..
-    #- docker run --rm -v ..:/workflow -v /var/run/docker.sock:/var/run/docker.sock nextflow/nextflow:20.04.1 nextflow run /workflow
+    - docker run --rm -v $(pwd):/workdir -v $(pwd)/../test/tests/full1/rules.tsv:/rules.tsv registry.gitlab.com/uit-sfb/nextflow-output-check/nextflow-output-check:0.1.0-SNPASHOT --workdir /workdir --rules /rules.tsv
