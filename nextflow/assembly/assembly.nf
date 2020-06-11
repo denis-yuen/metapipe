@@ -22,8 +22,8 @@ workflow Assembly {
     //PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
     //Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
   emit:
-    trimmedMerged = TrimmomaticSE.out.merged
-    trimmedR1 = TrimmomaticPE.out.unmergedR1
-    trimmedR2 = TrimmomaticPE.out.unmergedR2
+    //trimmedMerged = TrimmomaticSE.out.merged
+    //trimmedR1 = TrimmomaticPE.out.unmergedR1
+    //trimmedR2 = TrimmomaticPE.out.unmergedR2
     //contigs = Megahit.out.contigs
 }
