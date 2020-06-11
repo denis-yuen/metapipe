@@ -72,3 +72,4 @@ https://nextflow.io/docs/latest/tracing.html
 https://nextflow.io/docs/latest/mail.html
 
 `-N <email_address>`
+
