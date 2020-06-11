@@ -4,6 +4,9 @@ test full1:
     - test-server
     - bash
 
+  before_script:
+    - docker pull registry.gitlab.com/uit-sfb/nextflow-output-check/nextflow-output-check:0.1.0-SNPASHOT
+
   script:
     - mkdir -p target && cd target
     - nextflow run .. -with-trace || true #We still want to run the output check even if the pipeline failed
