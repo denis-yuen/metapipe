@@ -1,4 +1,4 @@
-build refDb:
+refDb build:
   stage: build
   tags:
     - test-server
@@ -6,7 +6,7 @@ build refDb:
 
   except:
     variables:
-      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logic}.*/ && $CI_COMMIT_MESSAGE !~ /.*{refDb}.*/
+      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{refDb}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logic}.*/
 
   before_script:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
