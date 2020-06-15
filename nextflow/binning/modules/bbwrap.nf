@@ -4,10 +4,10 @@ process BbWrap {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/bbmap:38.79'
 
   input:
-    path ref, stageAs: 'inputDir/*'
-    path merged, stageAs: 'inputDir/*'
-    path trimmedR1, stageAs: 'inputDir/*'
-    path trimmedR2, stageAs: 'inputDir/*'
+    path ref, stageAs: 'in/*'
+    path merged, stageAs: 'in/*'
+    path trimmedR1, stageAs: 'in/*'
+    path trimmedR2, stageAs: 'in/*'
 
   output:
     path 'out/alignment.sam.gz', emit: alignment

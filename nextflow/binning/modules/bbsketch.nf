@@ -4,7 +4,7 @@ process BbSketch {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/bbmap:38.79'
 
   input:
-    path bin, stageAs: 'inputDir/*'
+    path bin, stageAs: 'in/*'
 
   output:
     path 'out/*.sketch', emit: bin

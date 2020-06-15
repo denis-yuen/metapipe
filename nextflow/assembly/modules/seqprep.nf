@@ -4,7 +4,7 @@ process Seqprep {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/seqprep:1.3.2'
 
   input:
-    tuple DATUM, path(input, stageAs: 'inputDir/*')
+    tuple DATUM, path(input, stageAs: 'in/*')
 
   output:
     path 'out/slices/*/unmerged_r1.fastq.gz', emit: unmergedR1

@@ -4,8 +4,8 @@ process PairReads {
   container 'preprocess-reads:0.1.0-SNAPSHOT'
 
   input:
-    path inputR1, stageAs: 'inputDir/r1/*'
-    path inputR2, stageAs: 'inputDir/r2/*'
+    path inputR1, stageAs: 'in/r1/*'
+    path inputR2, stageAs: 'in/r2/*'
 
   output:
     path 'out/r1.fastq.gz', emit: r1

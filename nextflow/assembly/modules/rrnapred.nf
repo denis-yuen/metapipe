@@ -4,7 +4,7 @@ process Rrnapred {
   container 'rrnapred:0.1.0-SNAPSHOT'
 
   input:
-    tuple FILENAME, path(input, stageAs: 'inputDir/*')
+    tuple FILENAME, path(input, stageAs: 'in/*')
 
   output:
     path 'out/merged/filtered.fastq.gz', emit: merged_filtered, optional: true

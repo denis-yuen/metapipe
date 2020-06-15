@@ -6,9 +6,9 @@ process Megahit {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/megahit:1.2.9'
 
   input:
-    path inputR1, stageAs: 'inputDir/*'
-    path inputR2, stageAs: 'inputDir/*'
-    path inputMerged, stageAs: 'inputDir/*'
+    path inputR1, stageAs: 'in/*'
+    path inputR2, stageAs: 'in/*'
+    path inputMerged, stageAs: 'in/*'
 
   output:
     path 'out/contigs.fasta', emit: contigs

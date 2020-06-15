@@ -4,7 +4,7 @@ process BbPileup {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/bbmap:38.79'
 
   input:
-    path alignment, stageAs: 'inputDir/*'
+    path alignment, stageAs: 'in/*'
 
   output:
     path 'out/coverage.txt', emit: coverage

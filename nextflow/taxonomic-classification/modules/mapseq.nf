@@ -1,13 +1,13 @@
 process Mapseq {
-  echo true
+  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/mapseq:1.2.6'
 
   input:
     val refdb
-    path inputMerged, stageAs: 'inputDir/merged'
-    path inputR1, stageAs: 'inputDir/unmerged_r1'
-    path inputR2, stageAs: 'inputDir/unmerged_r2'
+    path inputMerged, stageAs: 'in/merged'
+    path inputR1, stageAs: 'in/unmerged_r1'
+    path inputR2, stageAs: 'in/unmerged_r2'
 
   output:
     path 'out/mapseq.out', emit: taxo

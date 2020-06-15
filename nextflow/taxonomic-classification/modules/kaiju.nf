@@ -6,9 +6,9 @@ process Kaiju {
 
   input:
     val refdb
-    path inputMerged, stageAs: 'inputDir/merged'
-    path inputR1, stageAs: 'inputDir/unmerged_r1'
-    path inputR2, stageAs: 'inputDir/unmerged_r2'
+    path inputMerged, stageAs: 'in/merged'
+    path inputR1, stageAs: 'in/unmerged_r1'
+    path inputR2, stageAs: 'in/unmerged_r2'
 
   output:
     path 'out/kaiju.out', emit: taxo
@@ -24,9 +24,9 @@ process Kaiju {
         exit 1
       fi
     fi
-    cat $inputMerged $inputR1 $inputR2 > /tmp/combined.fastq
+    cat $inputMerged $inputR1 $inputR2 > /tmp/combined.fastq.gz
     mkdir -p out
     /app/kaiju/kaiju -t $DB_PATH/nodes.dmp -f $DB_PATH/*.fmi \
-      -i /tmp/combined.fastq -o out/kaiju.out -z $MK_CPU_INT
+      -i /tmp/combined.fastq.gz -o out/kaiju.out -z $MK_CPU_INT
     '''
 }

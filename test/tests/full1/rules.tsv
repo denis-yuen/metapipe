@@ -31,5 +31,5 @@ Binning:BbSketch	atLeastOneHasOutput	bin.001.sketch
 Binning:BbSketch	atLeastOneHasOutput	bin.002.sketch
 Binning:BbSketch	aggregatedOutput	.sketch	2372	10
 
-TaxoKaiju:Kaiju	hasOutput	kaiju.out	3077293
-TaxoMapseq:Mapseq	hasOutput	mapseq.out	235055
+TaxoKaiju:Kaiju	hasOutput	kaiju.out	3077293	10
+TaxoMapseq:Mapseq	hasOutput	mapseq.out	235055	10

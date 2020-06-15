@@ -6,7 +6,7 @@ process PreProcessReads {
   container 'preprocess-reads:0.1.0-SNAPSHOT'
 
   input:
-    path 'inputDir/*'
+    path 'in/*'
 
   output:
     path 'out/slices/*', emit: slices
@@ -15,15 +15,15 @@ process PreProcessReads {
     '''
     set +u
     SLICES=!{params.PreProcessReads_slices}
-    FORWARD=($(find inputDir -name "forward.fastq*" \\( -type f -or -type l \\) ))
+    FORWARD=($(find in -name "forward.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $FORWARD ]]; then
       R1_PARAM="--r1 $FORWARD"
     fi
-    REVERSE=($(find inputDir -name "reverse.fastq*" \\( -type f -or -type l \\) ))
+    REVERSE=($(find in -name "reverse.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $REVERSE ]]; then
       R2_PARAM="--r2 $REVERSE"
     fi
-    INTERLEAVED=($(find inputDir -name "interleaved.fastq*" \\( -type f -or -type l \\) ))
+    INTERLEAVED=($(find in -name "interleaved.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $INTERLEAVED ]]; then
       INTERLEAVED_PARAM="--interleaved $INTERLEAVED"
     fi

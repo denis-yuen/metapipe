@@ -4,8 +4,8 @@ process Maxbin {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/maxbin:2.2.7'
 
   input:
-    path contigs, stageAs: 'inputDir/*'
-    path coverage, stageAs: 'inputDir/*'
+    path contigs, stageAs: 'in/*'
+    path coverage, stageAs: 'in/*'
 
   output:
     path 'out/bin.*.fasta', emit: bins

@@ -6,7 +6,7 @@ process TrimmomaticSE {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/trimmomatic:0.39'
 
   input:
-    path 'inputDir/*'
+    path 'in/*'
 
   output:
     path 'out/merged.fastq.gz', emit: merged
@@ -20,7 +20,7 @@ process TrimmomaticSE {
     fi
     mkdir -p out
     java -Xms$MK_MEM_BYTES $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar \
-      SE -threads $MK_CPU_INT -phred33 inputDir/merged.fastq.gz out/merged.fastq.gz AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:$READS_CUTOFF
+      SE -threads $MK_CPU_INT -phred33 in/merged.fastq.gz out/merged.fastq.gz AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:$READS_CUTOFF
     '''
 }
 
@@ -30,8 +30,8 @@ process TrimmomaticPE {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/trimmomatic:0.39'
 
   input:
-    path 'inputDir/unmergedR1.fastq.gz'
-    path 'inputDir/unmergedR2.fastq.gz'
+    path 'in/unmergedR1.fastq.gz'
+    path 'in/unmergedR2.fastq.gz'
 
   output:
     path 'out/unmerged_r1.fastq.gz', emit: unmergedR1
@@ -46,7 +46,7 @@ process TrimmomaticPE {
     fi
     mkdir -p out
     java -Xms$MK_MEM_BYTES $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar \
-      PE -threads $MK_CPU_INT -phred33 inputDir/unmergedR1.fastq.gz inputDir/unmergedR2.fastq.gz \
+      PE -threads $MK_CPU_INT -phred33 in/unmergedR1.fastq.gz in/unmergedR2.fastq.gz \
       out/unmerged_r1.fastq.gz /dev/null out/unmerged_r2.fastq.gz /dev/null AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:$READS_CUTOFF
     '''
 }
