@@ -1,3 +1,32 @@
 Assembly:Seqprep	aggregatedOutput	unmerged_r1.fastq.gz	1612560	10
 Assembly:Seqprep	aggregatedOutput	unmerged_r2.fastq.gz	1784571	10
-Assembly:Seqprep	hasOutput	merged.fastq.gz
+Assembly:Seqprep	aggregatedOutput	merged.fastq.gz	7108764	10
+
+Assembly:TrimmomaticSE	hasOutput	merged.fastq.gz	6848200	10
+Assembly:TrimmomaticPE	hasOutput	unmerged_r1.fastq.gz	904850	10
+Assembly:TrimmomaticPE	hasOutput	unmerged_r2.fastq.gz	776027	10
+
+Assembly:Rrnapred	aggregatedOutput	unmerged_r1/filtered.fastq.gz	900229	10
+Assembly:Rrnapred	aggregatedOutput	unmerged_r1/pred16s.fasta	26274	10
+Assembly:Rrnapred	aggregatedOutput	unmerged_r2/filtered.fastq.gz	773372	10
+Assembly:Rrnapred	aggregatedOutput	unmerged_r2/pred16s.fasta	20379	10
+Assembly:Rrnapred	aggregatedOutput	merged/filtered.fastq.gz	6816416	10
+Assembly:Rrnapred	aggregatedOutput	merged/pred16s.fasta	305187	10
+
+Assembly:PairReads	hasOutput	r1.fastq.gz	884959	10
+Assembly:PairReads	hasOutput	r2.fastq.gz	760021	10
+
+Assembly:Megahit	hasOutput	contigs.fasta	387811	10
+
+
+Binning:BbWrap	hasOutput	alignment.sam.gz	2119185	10
+
+Binning:BbPileup	aggregatedOutput	coverage.txt	22369	10
+
+Binning:Maxbin	hasOutput	bin.001.fasta
+Binning:Maxbin	hasOutput	bin.002.fasta
+Binning:Maxbin	aggregatedOutput	.fasta	370156	10
+
+Binning:BbSketch	atLeastOneHasOutput	bin.001.sketch
+Binning:BbSketch	atLeastOneHasOutput	bin.002.sketch
+Binning:BbSketch	aggregatedOutput	.sketch	2372	10
