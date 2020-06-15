@@ -19,7 +19,7 @@ process Mapseq {
       DB_PATH="!{refdb}/db/$(ls "!{refdb}/db")"
       DB="${DB_PATH}/silvamar.fasta ${DB_PATH}/silvamar.tax"
     fi
-    cat $inputMerged $inputR1 $inputR2 > /tmp/combined.fasta
+    cat !{inputMerged} !{inputR1} !{inputR2} > /tmp/combined.fasta
     mkdir -p out
     /app/mapseq/mapseq -nthreads $MK_CPU_INT /tmp/combined.fasta ${DB} > out/mapseq.out
     '''

@@ -24,7 +24,7 @@ process Kaiju {
         exit 1
       fi
     fi
-    cat $inputMerged $inputR1 $inputR2 > /tmp/combined.fastq.gz
+    cat !{inputMerged} !{inputR1} !{inputR2} > /tmp/combined.fastq.gz
     mkdir -p out
     /app/kaiju/kaiju -t $DB_PATH/nodes.dmp -f $DB_PATH/*.fmi \
       -i /tmp/combined.fastq.gz -o out/kaiju.out -z $MK_CPU_INT
