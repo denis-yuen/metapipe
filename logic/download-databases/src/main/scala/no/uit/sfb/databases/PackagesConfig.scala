@@ -1,9 +1,9 @@
-package no.uit.sfb.databases
+package no.uit.sfb.metapipe
 
 import java.net.URL
 import java.nio.file.{Path, Paths}
 
-import no.uit.sfb.databases.utils.ArtifactCreds
+import no.uit.sfb.metapipe.utils.ArtifactCreds
 
 case class PackagesConfig(
     cmd: String = "",

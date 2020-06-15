@@ -1,10 +1,10 @@
-package no.uit.sfb.databases
+package no.uit.sfb.metapipe
 
 import java.net.URL
 import java.nio.file._
 
 import com.typesafe.scalalogging.LazyLogging
-import no.uit.sfb.databases.utils.GenericVersion
+import no.uit.sfb.metapipe.utils.GenericVersion
 import no.uit.sfb.scalautils.common.FileUtils
 
 import scala.concurrent.ExecutionContext

@@ -1,6 +1,6 @@
-package no.uit.sfb.databases
+package no.uit.sfb.metapipe
 
-import no.uit.sfb.databases.utils.GenericVersion
+import no.uit.sfb.metapipe.utils.GenericVersion
 
 case class Package(packageName: String, artifacts: Map[String, Artifact]) {
   def ++(other: Package): Package = {

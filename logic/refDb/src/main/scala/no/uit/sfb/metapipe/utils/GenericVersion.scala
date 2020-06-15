@@ -1,4 +1,4 @@
-package no.uit.sfb.databases.utils
+package no.uit.sfb.metapipe.utils
 
 import scala.util.Try
 

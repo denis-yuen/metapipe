@@ -1,4 +1,4 @@
-package no.uit.sfb.databases
+package no.uit.sfb.metapipe
 
 import com.typesafe.scalalogging.LazyLogging
 import scopt.OParser

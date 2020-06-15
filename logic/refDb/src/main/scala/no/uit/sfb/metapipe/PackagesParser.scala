@@ -1,9 +1,9 @@
-package no.uit.sfb.databases
+package no.uit.sfb.metapipe
 
 import java.io.File
 
 import scopt.OParser
-import no.uit.sfb.info.ref_databases_mgmt.BuildInfo
+import no.uit.sfb.info.ref_db.BuildInfo
 
 object PackagesParser {
 
