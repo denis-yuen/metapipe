@@ -15,15 +15,15 @@ process PreProcessReads {
     '''
     set +u
     SLICES=!{params.PreProcessReads_slices}
-    FORWARD=($(find inputDir -name "forward.fastq*" -type f -or -type l))
+    FORWARD=($(find inputDir -name "forward.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $FORWARD ]]; then
       R1_PARAM="--r1 $FORWARD"
     fi
-    REVERSE=($(find inputDir -name "reverse.fastq*" -type f -or -type l))
+    REVERSE=($(find inputDir -name "reverse.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $REVERSE ]]; then
       R2_PARAM="--r2 $REVERSE"
     fi
-    INTERLEAVED=($(find inputDir -name "interleaved.fastq*" -type f -or -type l))
+    INTERLEAVED=($(find inputDir -name "interleaved.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $INTERLEAVED ]]; then
       INTERLEAVED_PARAM="--interleaved $INTERLEAVED"
     fi

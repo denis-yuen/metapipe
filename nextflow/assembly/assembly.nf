@@ -18,12 +18,12 @@ workflow Assembly {
     unmergedR2_ch = Seqprep.out.unmergedR2.collectFile(name: 'unmergedR2.fastq.gz', sort: {it.parent.baseName})
     TrimmomaticSE(merged_ch)
     TrimmomaticPE(unmergedR1_ch, unmergedR2_ch)
-    TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2).map{ path -> tuple(path.simpleName, path) } //| Rrnapred
-    //PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
-    //Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
+    TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2).map{ path -> tuple(path.simpleName, path) } | Rrnapred
+    PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
+    Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
   emit:
-    //trimmedMerged = TrimmomaticSE.out.merged
-    //trimmedR1 = TrimmomaticPE.out.unmergedR1
-    //trimmedR2 = TrimmomaticPE.out.unmergedR2
-    //contigs = Megahit.out.contigs
+    trimmedMerged = TrimmomaticSE.out.merged
+    trimmedR1 = TrimmomaticPE.out.unmergedR1
+    trimmedR2 = TrimmomaticPE.out.unmergedR2
+    contigs = Megahit.out.contigs
 }

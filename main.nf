@@ -21,7 +21,7 @@ include {Binning} from './nextflow/binning/binning.nf'
 workflow {
   read_pairs_ch = Channel.fromPath( params.reads + '/*.fastq*', checkIfExists: true ) | collect
   Assembly(read_pairs_ch)
-  //Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
+  Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
 }
 
  /*

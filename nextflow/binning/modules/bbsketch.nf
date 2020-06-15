@@ -17,7 +17,7 @@ process BbSketch {
     if [[ -z $MK_MEM_LIMIT_BYTES ]]; then
       XMX_FLAG="-Xmx$MK_MEM_LIMIT_BYTES"
     fi
-    /app/bbmap/sendsketch.sh in=$bin out=out/$BIN_OUT \
+    /app/bbmap/sendsketch.sh in=!{bin} out=out/$BIN_OUT \
       sizemult=10 format=2 mode=single maxfraction=0.1 nt color=f -Xms$MK_MEM_BYTES $XMX_FLAG
     '''
 }
