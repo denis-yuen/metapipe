@@ -17,11 +17,13 @@ log.info """
 // import modules
 include {Assembly} from './nextflow/assembly/assembly.nf'
 include {Binning} from './nextflow/binning/binning.nf'
+include {TaxoKaiju} from './nextflow/taxonomic-classification/taxoKaiju.nf'
 
 workflow {
   read_pairs_ch = Channel.fromPath( params.reads + '/*.fastq*', checkIfExists: true ) | collect
   Assembly(read_pairs_ch)
-  Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
+  //Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
+  TaxoKaiju(Assembly.out.filteredMerged, Assembly.out.filteredR1, Assembly.out.filteredR2)
 }
 
  /*

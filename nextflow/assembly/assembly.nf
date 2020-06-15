@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 // import modules
 include {PreProcessReads} from './modules/preProcessReads.nf'
 include {Seqprep} from './modules/seqprep.nf'
@@ -25,5 +23,8 @@ workflow Assembly {
     trimmedMerged = TrimmomaticSE.out.merged
     trimmedR1 = TrimmomaticPE.out.unmergedR1
     trimmedR2 = TrimmomaticPE.out.unmergedR2
+    filteredMerged = Rrnapred.out.merged_filtered
+    filteredR1 = Rrnapred.out.unmergedR1_filtered
+    filteredR2 = Rrnapred.out.unmergedR2_filtered
     contigs = Megahit.out.contigs
 }

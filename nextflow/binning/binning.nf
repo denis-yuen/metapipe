@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 // import modules
 include {BbWrap} from './modules/bbwrap.nf'
 include {BbPileup} from './modules/bbpileup.nf'
