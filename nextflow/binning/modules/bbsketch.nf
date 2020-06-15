@@ -1,7 +1,7 @@
 process BbSketch {
   //echo true
 
-  container 'registry.gitlab.com/uit-sfb/genomic-tools/bbmap:38.41'
+  container 'registry.gitlab.com/uit-sfb/genomic-tools/bbmap:38.79'
 
   input:
     path bin, stageAs: 'inputDir/*'

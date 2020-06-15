@@ -9,6 +9,7 @@ include {Megahit} from './modules/megahit.nf'
 workflow Assembly {
   take:
     read_pairs_ch
+
   main:
     PreProcessReads(read_pairs_ch) | flatten | map { path -> tuple(path.baseName, path) } | Seqprep
     merged_ch = Seqprep.out.merged.collectFile(name: 'merged.fastq.gz', sort: {it.parent.baseName})
@@ -19,6 +20,7 @@ workflow Assembly {
     TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2).map{ path -> tuple(path.simpleName, path) } | Rrnapred
     PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
     Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
+
   emit:
     trimmedMerged = TrimmomaticSE.out.merged
     trimmedR1 = TrimmomaticPE.out.unmergedR1
@@ -26,5 +28,8 @@ workflow Assembly {
     filteredMerged = Rrnapred.out.merged_filtered
     filteredR1 = Rrnapred.out.unmergedR1_filtered
     filteredR2 = Rrnapred.out.unmergedR2_filtered
+    pred16sMerged = Rrnapred.out.merged_pred16s
+    pred16sR1 = Rrnapred.out.unmergedR1_pred16s
+    pred16sR2 = Rrnapred.out.unmergedR2_pred16s
     contigs = Megahit.out.contigs
 }

@@ -18,12 +18,14 @@ log.info """
 include {Assembly} from './nextflow/assembly/assembly.nf'
 include {Binning} from './nextflow/binning/binning.nf'
 include {TaxoKaiju} from './nextflow/taxonomic-classification/taxoKaiju.nf'
+include {TaxoMapseq} from './nextflow/taxonomic-classification/taxoMapseq.nf'
 
 workflow {
   read_pairs_ch = Channel.fromPath( params.reads + '/*.fastq*', checkIfExists: true ) | collect
   Assembly(read_pairs_ch)
-  //Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
+  Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
   TaxoKaiju(Assembly.out.filteredMerged, Assembly.out.filteredR1, Assembly.out.filteredR2)
+  TaxoMapseq(Assembly.out.pred16sMerged, Assembly.out.pred16sR1, Assembly.out.pred16sR2)
 }
 
  /*
