@@ -1,4 +1,4 @@
-refDb build:
+refDb:
   stage: build
   tags:
     - test-server

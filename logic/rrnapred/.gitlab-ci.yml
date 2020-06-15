@@ -1,4 +1,4 @@
-rrnapred build:
+rrnapred:
   stage: build
   tags:
     - test-server

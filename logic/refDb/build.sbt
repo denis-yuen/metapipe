@@ -44,7 +44,7 @@ enablePlugins(DockerPlugin, JavaAppPackaging)
 
 dockerLabels := Map("gitCommit" -> s"${git.formattedShaVersion.value.getOrElse("unknown")}@${git.gitCurrentBranch.value}")
 dockerRepository in Docker := Some("registry.gitlab.com")
-dockerUsername in Docker := Some("uit-sfb/mk-metapipe-logic")
+dockerUsername in Docker := Some("uit-sfb/metapipe")
 //dockerChmodType := DockerChmodType.Custom("u=rX,g=rX,o=rX")
 daemonUser in Docker := "sfb" //"in Docker" needed for this parameter
 

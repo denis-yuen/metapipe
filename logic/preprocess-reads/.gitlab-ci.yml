@@ -1,4 +1,4 @@
-preprocess-reads build:
+preprocess-reads:
   stage: build
   tags:
     - test-server
