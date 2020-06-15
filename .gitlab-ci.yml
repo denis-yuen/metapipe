@@ -6,4 +6,5 @@ include:
   - '/test/tests/full1/.gitlab-ci.yml'
   - '/logic/preprocess-reads/.gitlab-ci.yml'
   - '/logic/rrnapred/.gitlab-ci.yml'
+  - '/logic/refDb/.gitlab-ci.yml'
 
