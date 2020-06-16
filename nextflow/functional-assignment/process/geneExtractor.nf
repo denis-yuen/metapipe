@@ -9,7 +9,7 @@ process GeneExtractor {
     tuple DATUM, path(contigs, stageAs: 'in/contigs/*'), path(mga, stageAs: 'in/mga/*')
 
   output:
-    path 'out/slices/*/cds.prot.fasta', emit: cds
+    path 'out/slices/*', emit: cds
 
   shell:
     '''
