@@ -1,8 +1,7 @@
-// import modules
-include {BbWrap} from './modules/bbwrap.nf'
-include {BbPileup} from './modules/bbpileup.nf'
-include {Maxbin} from './modules/maxbin.nf'
-include {BbSketch} from './modules/bbsketch.nf'
+include {BbWrap} from './process/bbwrap.nf'
+include {BbPileup} from './process/bbpileup.nf'
+include {Maxbin} from './process/maxbin.nf'
+include {BbSketch} from './process/bbsketch.nf'
 
 workflow Binning {
   take:
