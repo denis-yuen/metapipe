@@ -1,7 +1,7 @@
 params.Diamond_sensitivity = 'sensitive'
 
 process Diamond {
-  echo true
+  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/diamond:0.9.31'
 
@@ -37,7 +37,6 @@ process Diamond {
         SENSITIVE_FLAG=""
         ;;
     esac
-    set -x
     /app/diamond/diamond blastp -d "$DB_PATH" -q "!{input}/cds.prot.fasta" -o "$OUT_DIR/diamond.out" -k 5 -p $MK_CPU_INT -c 4 -b 1 $SENSITIVE_FLAG --outfmt $OUT_FMT
     '''
 }

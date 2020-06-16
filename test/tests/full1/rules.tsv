@@ -44,3 +44,5 @@ FA:FaPriam:PriamSearch	aggregatedOutput	predictableECs.txt	171284	10
 FA:FaPriam:PriamSearch	aggregatedOutput	sequenceECs.txt	43066	10
 
 FA: FaDiamond:Diamond	aggregatedOutput	diamond.out	314458	10
+
+FA: FaInterproscan:Interproscan	aggregatedOutput	interpro.out	219603	10

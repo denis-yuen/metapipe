@@ -3,6 +3,7 @@ include {Mga} from './process/mga.nf'
 include {GeneExtractor} from './process/geneExtractor.nf'
 include {FaPriam} from './faPriam.nf'
 include {FaDiamond} from './faDiamond.nf'
+include {FaInterproscan} from './faInterproscan.nf'
 
 workflow FA {
   take:
@@ -14,7 +15,7 @@ workflow FA {
     cds_ch = contigs_ch.join(mga_ch) | GeneExtractor | flatten | map { path -> tuple(path.baseName, path) }
     FaPriam(cds_ch)
     FaDiamond(cds_ch)
+    FaInterproscan(cds_ch)
 
   //emit:
-  //  trimmedMerged = TrimmomaticSE.out.merged
 }
