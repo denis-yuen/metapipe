@@ -1,10 +1,9 @@
-// import modules
-include {PreProcessReads} from './modules/preProcessReads.nf'
-include {Seqprep} from './modules/seqprep.nf'
-include {TrimmomaticSE; TrimmomaticPE} from './modules/trimmomatic.nf'
-include {Rrnapred} from './modules/rrnapred.nf'
-include {PairReads} from './modules/pairReads.nf'
-include {Megahit} from './modules/megahit.nf'
+include {PreProcessReads} from './process/preProcessReads.nf'
+include {Seqprep} from './process/seqprep.nf'
+include {TrimmomaticSE; TrimmomaticPE} from './process/trimmomatic.nf'
+include {Rrnapred} from './process/rrnapred.nf'
+include {PairReads} from './process/pairReads.nf'
+include {Megahit} from './process/megahit.nf'
 
 workflow Assembly {
   take:

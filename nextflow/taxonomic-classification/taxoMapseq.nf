@@ -1,8 +1,7 @@
 params.Mapseq_refdb = 'silvamar:4'
 
-// import modules
 include {DownloadRefDb} from '../helper/downloadRefDb.nf'
-include {Mapseq} from './modules/mapseq.nf'
+include {Mapseq} from './process/mapseq.nf'
 
 workflow TaxoMapseq {
   take:

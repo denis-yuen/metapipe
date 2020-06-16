@@ -14,7 +14,6 @@ process PreProcessReads {
   shell:
     '''
     set +u
-    SLICES=!{params.PreProcessReads_slices}
     FORWARD=($(find in -name "forward.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $FORWARD ]]; then
       R1_PARAM="--r1 $FORWARD"
@@ -31,6 +30,6 @@ process PreProcessReads {
       XMX_FLAG="-J-Xmx$MK_MEM_LIMIT_BYTES"
     fi
     /opt/docker/bin/preprocess-reads -J-Xms$MK_MEM_BYTES $XMX_FLAG -- \
-      $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices $SLICES
+      $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices !{params.PreProcessReads_slices}
     '''
 }

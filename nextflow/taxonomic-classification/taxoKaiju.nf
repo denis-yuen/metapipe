@@ -1,8 +1,7 @@
 params.Kaiju_refdb = 'kaiju-mardb:1.7.2'
 
-// import modules
 include {DownloadRefDb} from '../helper/downloadRefDb.nf'
-include {Kaiju} from './modules/kaiju.nf'
+include {Kaiju} from './process/kaiju.nf'
 
 workflow TaxoKaiju {
   take:
