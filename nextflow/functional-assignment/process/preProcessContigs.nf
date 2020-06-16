@@ -18,6 +18,6 @@ process PreProcessContigs {
     if [[ -z $MK_MEM_LIMIT_BYTES ]]; then
       XMX_FLAG="-J-Xmx$MK_MEM_LIMIT_BYTES"
     fi
-    /opt/docker/bin/preprocess-contigs -J-Xms$MK_MEM_BYTES $XMX_FLAG -- --inputPath "!{contigs}" --outPath $MK_OUT/slices --contigsCutoff "!{params.PreProcessContigs_contigsCutoff}" --slices "!{params.PreProcessContigs_slices}"
+    /opt/docker/bin/preprocess-contigs -J-Xms$MK_MEM_BYTES $XMX_FLAG -- --inputPath "!{contigs}" --outPath out/slices --contigsCutoff "!{params.PreProcessContigs_contigsCutoff}" --slices "!{params.PreProcessContigs_slices}"
     '''
 }
