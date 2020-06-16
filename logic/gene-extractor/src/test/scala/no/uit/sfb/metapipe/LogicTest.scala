@@ -3,7 +3,7 @@ package no.uit.sfb.metapipe
 import java.nio.file.Paths
 
 import no.uit.sfb.scalautils.common.FileUtils
-import no.uit.sfb.stages.postprocessingmga.{Config, Logic}
+import no.uit.sfb.metapipe.{Config, Logic}
 import org.scalatest.{FunSpec, Matchers}
 
 class LogicTest extends FunSpec with Matchers {
