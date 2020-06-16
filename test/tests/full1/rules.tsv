@@ -31,18 +31,18 @@ Binning:BbSketch	atLeastOneHasOutput	bin.001.sketch
 Binning:BbSketch	atLeastOneHasOutput	bin.002.sketch
 Binning:BbSketch	aggregatedOutput	.sketch	2372	10
 
-TaxoKaiju:Kaiju	hasOutput	kaiju.out	3077293	10
-TaxoMapseq:Mapseq	hasOutput	mapseq.out	235055	10
+TaxonomicClassification:Kaiju:KaijuProc	hasOutput	kaiju.out	3077293	10
+TaxonomicClassification:Mapseq:MapseqProc	hasOutput	mapseq.out	235055	10
 
-FA:PreProcessContigs	aggregatedOutput	contigs.fasta	392715	10
-FA:Mga	aggregatedOutput	mga.out	44617	10
-FA:GeneExtractor	aggregatedOutput	cds.prot.fasta	119025	10
+FunctionalAssignment:PreProcessContigs	aggregatedOutput	contigs.fasta	392715	10
+FunctionalAssignment:Mga	aggregatedOutput	mga.out	44617	10
+FunctionalAssignment:GeneExtractor	aggregatedOutput	cds.prot.fasta	119025	10
 
-FA:Priam:PriamSearchProc	aggregatedOutput	genomeECs.txt	227513	10
-FA:Priam:PriamSearchProc	aggregatedOutput	genomeEnzymes.txt	32353	10
-FA:Priam:PriamSearchProc	aggregatedOutput	predictableECs.txt	171284	10
-FA:Priam:PriamSearchProc	aggregatedOutput	sequenceECs.txt	43066	10
+FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	genomeECs.txt	227513	10
+FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	genomeEnzymes.txt	32353	10
+FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	predictableECs.txt	171284	10
+FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	sequenceECs.txt	43066	10
 
-FA:Diamond:DiamondProc	aggregatedOutput	diamond.out	314458	10
+FunctionalAssignment:Diamond:DiamondProc	aggregatedOutput	diamond.out	314458	10
 
-FA:Interproscan:InterproscanProc	aggregatedOutput	interpro.out	219603	10
+FunctionalAssignment:Interproscan:InterproscanProc	aggregatedOutput	interpro.out	219603	10
