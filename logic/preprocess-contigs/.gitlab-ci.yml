@@ -9,7 +9,7 @@ preprocess-contigs:
       - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{preprocess-contigs}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logic}.*/
 
   before_script:
-    - VERSION=$(cat .version)
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
 
   script:
     - cd logic/preprocess-contigs
