@@ -7,4 +7,6 @@ include:
   - '/logic/preprocess-reads/.gitlab-ci.yml'
   - '/logic/rrnapred/.gitlab-ci.yml'
   - '/logic/refDb/.gitlab-ci.yml'
+  - '/logic/preprocess-contigs/.gitlab-ci.yml'
+  - '/logic/gene-extractor/.gitlab-ci.yml'
 
