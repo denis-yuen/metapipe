@@ -36,3 +36,4 @@ TaxoMapseq:Mapseq	hasOutput	mapseq.out	235055	10
 
 FA:PreProcessContigs	aggregatedOutput	contigs.fasta	392715	10
 FA:Mga	aggregatedOutput	mga.out	44617	10
+FA:GeneExtractor	aggregatedOutput	cds.prot.fasta	119025	10

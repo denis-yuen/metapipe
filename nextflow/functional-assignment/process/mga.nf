@@ -7,7 +7,7 @@ process Mga {
     tuple DATUM, path(input, stageAs: 'in/*')
 
   output:
-    path 'out/slices/*/mga.out', emit: mga
+    path 'out/slices/*', emit: mga
 
   shell:
     '''
