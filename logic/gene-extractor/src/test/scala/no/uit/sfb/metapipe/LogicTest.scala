@@ -1,4 +1,4 @@
-package no.uit.sfb
+package no.uit.sfb.metapipe
 
 import java.nio.file.Paths
 
