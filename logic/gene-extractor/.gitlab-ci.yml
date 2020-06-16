@@ -1,0 +1,16 @@
+gene-extractor:
+  stage: build
+  tags:
+    - test-server
+    - bash
+
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logic}.*/ && $CI_COMMIT_MESSAGE !~ /.*{gene-extractor}.*/
+
+  before_script:
+    - VERSION=$(cat .version)
+
+  script:
+    - cd logic/gene-extractor
+    - sbt clean test docker:publish

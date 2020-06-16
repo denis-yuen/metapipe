@@ -1,0 +1,16 @@
+preprocess-contigs:
+  stage: build
+  tags:
+    - test-server
+    - bash
+
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /.*{[^!]*}.*/ && $CI_COMMIT_MESSAGE !~ /.*{preprocess-contigs}.*/ && $CI_COMMIT_MESSAGE !~ /.*{logic}.*/
+
+  before_script:
+    - VERSION=$(cat .version)
+
+  script:
+    - cd logic/preprocess-contigs
+    - sbt clean test docker:publish
