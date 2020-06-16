@@ -1,18 +1,16 @@
 params.Mapseq_refdb = 'silvamar:4'
 
 include {DownloadRefDb} from '../helper/downloadRefDb.nf'
-include {Mapseq} from './process/mapseq.nf'
+include {MapseqProc} from './process/mapseq-proc.nf'
 
-workflow TaxoMapseq {
+workflow Mapseq {
   take:
-    merged
-    r1
-    r2
+    input
 
   main:
     refdb = DownloadRefDb(params.Mapseq_refdb)
-    Mapseq(refdb, merged, r1, r2)
+    MapseqProc(refdb, input)
 
   emit:
-    mapseq = Mapseq.out.taxo
+    mapseq = MapseqProc.out.taxo
 }

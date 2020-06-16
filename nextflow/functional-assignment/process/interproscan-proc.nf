@@ -2,7 +2,7 @@ params.Interproscan_toolsCpu = 1
 params.Interproscan_maxWorkers = 3
 params.Interproscan_precalcService = ''
 
-process Interproscan {
+process InterproscanProc {
   //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/interproscan:5.42-78.0'

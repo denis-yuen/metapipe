@@ -1,16 +1,16 @@
 params.Diamond_refdb = 'diamond-marref-proteins:4'
 
 include {DownloadRefDb} from '../helper/downloadRefDb.nf'
-include {Diamond} from './process/diamond.nf'
+include {DiamondProc} from './process/diamond-proc.nf'
 
-workflow FaDiamond {
+workflow Diamond {
   take:
     input
 
   main:
     refdb = DownloadRefDb(params.Diamond_refdb)
-    Diamond(refdb, input)
+    DiamondProc(refdb, input)
 
   emit:
-    priam = Diamond.out.diamond
+    priam = DiamondProc.out.diamond
 }

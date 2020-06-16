@@ -1,16 +1,16 @@
 params.Priam_refdb = 'priam:JAN18'
 
 include {DownloadRefDb} from '../helper/downloadRefDb.nf'
-include {PriamSearch} from './process/priamSearch.nf'
+include {PriamSearchProc} from './process/priamSearch-proc.nf'
 
-workflow FaPriam {
+workflow Priam {
   take:
     input
 
   main:
     refdb = DownloadRefDb(params.Priam_refdb)
-    PriamSearch(refdb, input)
+    PriamSearchProc(refdb, input)
 
   emit:
-    priam = PriamSearch.out.priam
+    priam = PriamSearchProc.out.priam
 }

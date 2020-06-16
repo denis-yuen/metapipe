@@ -1,6 +1,6 @@
 params.Diamond_sensitivity = 'sensitive'
 
-process Diamond {
+process DiamondProc {
   //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/diamond:0.9.31'

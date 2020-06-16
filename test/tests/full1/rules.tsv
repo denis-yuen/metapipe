@@ -38,11 +38,11 @@ FA:PreProcessContigs	aggregatedOutput	contigs.fasta	392715	10
 FA:Mga	aggregatedOutput	mga.out	44617	10
 FA:GeneExtractor	aggregatedOutput	cds.prot.fasta	119025	10
 
-FA:FaPriam:PriamSearch	aggregatedOutput	genomeECs.txt	227513	10
-FA:FaPriam:PriamSearch	aggregatedOutput	genomeEnzymes.txt	32353	10
-FA:FaPriam:PriamSearch	aggregatedOutput	predictableECs.txt	171284	10
-FA:FaPriam:PriamSearch	aggregatedOutput	sequenceECs.txt	43066	10
+FA:Priam:PriamSearchProc	aggregatedOutput	genomeECs.txt	227513	10
+FA:Priam:PriamSearchProc	aggregatedOutput	genomeEnzymes.txt	32353	10
+FA:Priam:PriamSearchProc	aggregatedOutput	predictableECs.txt	171284	10
+FA:Priam:PriamSearchProc	aggregatedOutput	sequenceECs.txt	43066	10
 
-FA: FaDiamond:Diamond	aggregatedOutput	diamond.out	314458	10
+FA:Diamond:DiamondProc	aggregatedOutput	diamond.out	314458	10
 
-FA: FaInterproscan:Interproscan	aggregatedOutput	interpro.out	219603	10
+FA:Interproscan:InterproscanProc	aggregatedOutput	interpro.out	219603	10

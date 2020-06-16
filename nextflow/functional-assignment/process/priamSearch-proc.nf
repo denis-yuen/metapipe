@@ -1,4 +1,4 @@
-process PriamSearch {
+process PriamSearchProc {
   //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/priamsearch:2.0'

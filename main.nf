@@ -17,17 +17,17 @@ log.info """
 // import modules
 include {Assembly} from './nextflow/assembly/assembly.nf'
 include {Binning} from './nextflow/binning/binning.nf'
-include {TaxoKaiju} from './nextflow/taxonomic-classification/taxoKaiju.nf'
-include {TaxoMapseq} from './nextflow/taxonomic-classification/taxoMapseq.nf'
-include {FA} from './nextflow/functional-assignment/fa.nf'
+include {TaxonomicClassification} from './nextflow/taxonomic-classification/taxonomicClassification.nf'
+include {FunctionalAssignment} from './nextflow/functional-assignment/functionalAssignment.nf'
 
 workflow {
   read_pairs_ch = Channel.fromPath( params.reads + '/*.fastq*', checkIfExists: true ) | collect
   Assembly(read_pairs_ch)
   Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
-  TaxoKaiju(Assembly.out.filteredMerged, Assembly.out.filteredR1, Assembly.out.filteredR2)
-  TaxoMapseq(Assembly.out.pred16sMerged, Assembly.out.pred16sR1, Assembly.out.pred16sR2)
-  FA(Assembly.out.contigs)
+  filtered = Assembly.out.filteredMerged.concat(Assembly.out.filteredR1, Assembly.out.filteredR2).collectFile(name: 'filtered.fastq.gz', newLine: false)
+  pred16s = Assembly.out.pred16sMerged.concat(Assembly.out.pred16sR1, Assembly.out.pred16sR2).collectFile(name: 'pred16s.fasta', newLine: false)
+  TaxonomicClassification(filtered, pred16s)
+  FunctionalAssignment(Assembly.out.contigs)
 }
 
  /*
