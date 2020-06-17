@@ -1,7 +1,6 @@
-params.Trimmomatic_readsCutoff = 75
+params.readsCutoff = 75
 
 process TrimmomaticSE {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/trimmomatic:0.39'
 
@@ -14,7 +13,7 @@ process TrimmomaticSE {
   shell:
     '''
     set +u
-    READS_CUTOFF=!{params.Trimmomatic_readsCutoff}
+    READS_CUTOFF=!{params.readsCutoff}
     if [[ -n $MK_MEM_LIMIT_BYTES ]]; then
       XMX_FLAG="-Xmx$MK_MEM_LIMIT_BYTES"
     fi
@@ -25,7 +24,6 @@ process TrimmomaticSE {
 }
 
 process TrimmomaticPE {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/trimmomatic:0.39'
 
@@ -40,7 +38,7 @@ process TrimmomaticPE {
   shell:
     '''
     set +u
-    READS_CUTOFF=!{params.Trimmomatic_readsCutoff}
+    READS_CUTOFF=!{params.readsCutoff}
     if [[ -n $MK_MEM_LIMIT_BYTES ]]; then
       XMX_FLAG="-Xmx$MK_MEM_LIMIT_BYTES"
     fi

@@ -1,8 +1,6 @@
-params.PreProcessReads_slices = 4
+params.slices = 4
 
 process PreProcessReads {
-  //echo true
-
   container "preprocess-reads:${workflow.manifest.version}"
 
   input:
@@ -30,6 +28,6 @@ process PreProcessReads {
       XMX_FLAG="-J-Xmx$MK_MEM_LIMIT_BYTES"
     fi
     /opt/docker/bin/preprocess-reads -J-Xms$MK_MEM_BYTES $XMX_FLAG -- \
-      $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices !{params.PreProcessReads_slices}
+      $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices !{params.slices}
     '''
 }

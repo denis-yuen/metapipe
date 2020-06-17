@@ -1,7 +1,6 @@
 params.refdbDir = '/refdb'
 
 process DownloadRefDb {
-  //echo true
 
   container "ref-db:${workflow.manifest.version}"
 

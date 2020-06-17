@@ -1,7 +1,6 @@
-params.GeneExtractor_removeIncompleteGenes = false
+params.removeIncompleteGenes = false
 
 process GeneExtractor {
-  //echo true
 
   container "gene-extractor:${workflow.manifest.version}"
 
@@ -14,7 +13,7 @@ process GeneExtractor {
   shell:
     '''
     set +u
-    if !{params.GeneExtractor_removeIncompleteGenes}; then
+    if !{params.removeIncompleteGenes}; then
       RMV_NON_COMPLETE_FLAG="--removeNonCompleteGenes";
     else
       RMV_NON_COMPLETE_FLAG="";

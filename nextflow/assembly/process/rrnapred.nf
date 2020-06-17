@@ -1,5 +1,4 @@
 process Rrnapred {
-  //echo true
 
   container "rrnapred:${workflow.manifest.version}"
 

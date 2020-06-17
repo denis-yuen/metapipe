@@ -25,50 +25,32 @@ For instance, the *Marine* profile uses exclusively the high quality [MAR databa
 </div>
 *Metapipe profiles*
 
-## Workflow as a service
-
-todo
-
 ## Getting started
 
 ### Requirements
 
-https://www.nextflow.io/docs/latest/getstarted.html#requirements
-
-Note: Any Docker image must contain bash.
-
-### Installing Nextflow
-
-https://www.nextflow.io/docs/latest/getstarted.html#installation
+- Metapipe is based on [Nextflow](https://www.nextflow.io/docs/latest/index.html) ([Install instructions](https://www.nextflow.io/docs/latest/getstarted.html#installation)).
+- [Nextflow requirements](https://www.nextflow.io/docs/latest/getstarted.html#requirements)
 
 ### Executing the workflow
 
 ```bash
 #Optional, only to fetch changes from repository
 nextflow pull gitlab.com/uit-sfb/metapipe
-nextflow run gitlab.com/uit-sfb/metapipe
+nextflow run gitlab.com/uit-sfb/metapipe [options]
 ```
 
-### Debugging
+Some useful options:
+- `--paramName <paramValue>...`: to provide parameters (the list of parameters is available in [main.nf](main.nf)).
+- `-c <configFile>`: to provide config file (overlayed on top of [nextflow.config](nextflow.config))
+- `-resume`: to use cached results
+- `-with-trace`: to generate a trace (text)
+- `-N <email_address>`: to send an email when workflow execution ends
+
+#### Debugging
 
 Clone the repo, then:
 ```bash
 mkdir -p target && cd target
-nextflow run [-resume] .. [logging/mail options]
+nextflow run .. [options]
 ```
-
-### Logging
-
-https://nextflow.io/docs/latest/tracing.html
-
-  - `-with-report` to generate an html report
-  - `-with-trace` to generate a trace (text)
-  - `-with-timeline` to generate an html timeline
-  - `-with-dag dag.html` to generate an html DAG
-  - `-with-weblog <url>` POSTs to specified url metadata and traces a start and completion of job
-
-### Mail
-
-https://nextflow.io/docs/latest/mail.html
-
-`-N <email_address>`

@@ -1,7 +1,6 @@
-params.Diamond_sensitivity = 'sensitive'
+params.sensitivity = 'sensitive'
 
 process DiamondProc {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/diamond:0.9.31'
 
@@ -26,7 +25,7 @@ process DiamondProc {
     DB_PATH="!{refdb}/db/diamond/$DB_SUFFIX/nr.dmnd"
     OUT_DIR="out/slices/!{DATUM}"
     mkdir -p "$OUT_DIR"
-    case "!{params.Diamond_sensitivity}" in
+    case "!{params.sensitivity}" in
       sensitive)
         SENSITIVE_FLAG="--sensitive"
         ;;

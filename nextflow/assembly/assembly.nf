@@ -1,9 +1,9 @@
-include {PreProcessReads} from './process/preProcessReads.nf'
+include {PreProcessReads} from './process/preProcessReads.nf' params(slices: params.assembly_slices)
 include {Seqprep} from './process/seqprep.nf'
-include {TrimmomaticSE; TrimmomaticPE} from './process/trimmomatic.nf'
+include {TrimmomaticSE; TrimmomaticPE} from './process/trimmomatic.nf' params(readsCutoff: params.readsCutoff)
 include {Rrnapred} from './process/rrnapred.nf'
 include {PairReads} from './process/pairReads.nf'
-include {Megahit} from './process/megahit.nf'
+include {Megahit} from './process/megahit.nf' params(contigsCutoff: params.contigsCutoff)
 
 workflow Assembly {
   take:

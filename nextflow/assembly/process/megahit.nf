@@ -1,7 +1,6 @@
-params.Megahit_contigsCutoff = 1000
+params.contigsCutoff = 1000
 
 process Megahit {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/megahit:1.2.9'
 
@@ -17,10 +16,9 @@ process Megahit {
     '''
     set +u
     mkdir -p out
-    CONTIGS_CUTOFF=!{params.Megahit_contigsCutoff}
     #Note: -o must not exist. That is why we use -o /tmp/temp
     /app/megahit/bin/megahit -1 !{inputR1} -2 !{inputR2} -r !{inputMerged} -o /tmp/temp \
-      --min-contig-len $CONTIGS_CUTOFF \
+      --min-contig-len !{params.contigsCutoff} \
       -t $MK_CPU_INT -m $MK_MEM_BYTES
     RES=$?
     cat /tmp/temp/options.json && echo

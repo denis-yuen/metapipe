@@ -1,5 +1,4 @@
 process Seqprep {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/seqprep:1.3.2'
 

@@ -1,4 +1,4 @@
-params.Kaiju_refdb = 'kaiju-mardb:1.7.2'
+params.refdb = 'kaiju-mardb:1.7.2'
 
 include {DownloadRefDb} from '../helper/downloadRefDb.nf'
 include {KaijuProc} from './process/kaiju-proc.nf'
@@ -8,7 +8,7 @@ workflow Kaiju {
     input
 
   main:
-    refdb = DownloadRefDb(params.Kaiju_refdb)
+    refdb = DownloadRefDb(params.refdb)
     KaijuProc(refdb, input)
 
   emit:

@@ -1,9 +1,9 @@
-include {PreProcessContigs} from './process/preProcessContigs.nf'
+include {PreProcessContigs} from './process/preProcessContigs.nf' params(slices: params.functionalAnnotation_slices, contigsCutoff: params.contigsCutoff)
 include {Mga} from './process/mga.nf'
-include {GeneExtractor} from './process/geneExtractor.nf'
-include {Priam} from './priam.nf'
-include {Diamond} from './diamond.nf'
-include {Interproscan} from './interproscan.nf'
+include {GeneExtractor} from './process/geneExtractor.nf' params(removeIncompleteGenes: params.functionalAnnotation_removeIncompleteGenes)
+include {Priam} from './priam.nf' params(refdb: params.priam_refdb)
+include {Diamond} from './diamond.nf' params(refdb: params.diamond_refdb, sensitivity: params.diamond_sensitivity)
+include {Interproscan} from './interproscan.nf' params(refdb: params.interpro_refdb, toolsCpu: params.interpro_toolsCpu, maxWorkers: params.interpro_maxWorkers, precalcService: params.interpro_precalcService)
 
 workflow FunctionalAssignment {
   take:

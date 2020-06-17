@@ -1,5 +1,4 @@
 process Mga {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/mga:1'
 

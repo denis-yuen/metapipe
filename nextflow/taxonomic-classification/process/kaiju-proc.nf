@@ -1,8 +1,7 @@
 process KaijuProc {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/kaiju:1.7.3'
-  containerOptions '-e MK_MEM_BYTES=20000000000 -e MK_MEM_LIMIT_BYTES=20000000000'
+  label 'kaiju'
 
   input:
     val refdb

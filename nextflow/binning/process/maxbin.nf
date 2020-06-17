@@ -1,5 +1,4 @@
 process Maxbin {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/maxbin:2.2.7'
 

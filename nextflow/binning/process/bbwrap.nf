@@ -1,5 +1,4 @@
 process BbWrap {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/bbmap:38.79'
 

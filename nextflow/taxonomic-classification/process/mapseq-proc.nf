@@ -1,5 +1,4 @@
 process MapseqProc {
-  //echo true
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/mapseq:1.2.6'
 

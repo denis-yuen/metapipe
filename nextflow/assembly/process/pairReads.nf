@@ -1,5 +1,4 @@
 process PairReads {
-  //echo true
 
   container "preprocess-reads:${workflow.manifest.version}"
 
