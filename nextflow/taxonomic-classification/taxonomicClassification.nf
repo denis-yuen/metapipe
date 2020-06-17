@@ -10,5 +10,7 @@ workflow TaxonomicClassification {
     Kaiju(filtered)
     Mapseq(pred16s)
 
-  //emit:
+  emit:
+    kaiju = Kaiju.out
+    mapseq = Mapseq.out
 }

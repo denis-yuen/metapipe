@@ -12,7 +12,7 @@ process InterproscanProc {
     tuple DATUM, path(input, stageAs: 'in/*')
 
   output:
-    path 'out/slices/*', emit: interpro
+    path "out/slices/${DATUM}/interpro.out", emit: interpro
 
   shell:
     '''

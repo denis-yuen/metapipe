@@ -10,7 +10,7 @@ process DiamondProc {
     tuple DATUM, path(input, stageAs: 'in/*')
 
   output:
-    path 'out/slices/*', emit: diamond
+    path "out/slices/${DATUM}/diamond.out", emit: diamond
 
   shell:
     '''

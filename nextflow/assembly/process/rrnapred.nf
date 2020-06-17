@@ -1,7 +1,7 @@
 process Rrnapred {
   //echo true
 
-  container 'rrnapred:0.1.0-SNAPSHOT'
+  container "rrnapred:${workflow.manifest.version}"
 
   input:
     tuple FILENAME, path(input, stageAs: 'in/*')

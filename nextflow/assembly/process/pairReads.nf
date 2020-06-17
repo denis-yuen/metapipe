@@ -1,7 +1,7 @@
 process PairReads {
   //echo true
 
-  container 'preprocess-reads:0.1.0-SNAPSHOT'
+  container "preprocess-reads:${workflow.manifest.version}"
 
   input:
     path inputR1, stageAs: 'in/r1/*'

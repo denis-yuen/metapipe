@@ -3,19 +3,17 @@ params.GeneExtractor_removeIncompleteGenes = false
 process GeneExtractor {
   //echo true
 
-  container 'gene-extractor:0.1.0-SNAPSHOT'
+  container "gene-extractor:${workflow.manifest.version}"
 
   input:
     tuple DATUM, path(contigs, stageAs: 'in/contigs/*'), path(mga, stageAs: 'in/mga/*')
 
   output:
-    path 'out/slices/*', emit: cds
+    path "out/slices/${DATUM}", emit: cds
 
   shell:
     '''
     set +u
-    echo !{contigs}
-    echo !{mga}
     if !{params.GeneExtractor_removeIncompleteGenes}; then
       RMV_NON_COMPLETE_FLAG="--removeNonCompleteGenes";
     else

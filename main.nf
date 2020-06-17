@@ -24,9 +24,7 @@ workflow {
   read_pairs_ch = Channel.fromPath( params.reads + '/*.fastq*', checkIfExists: true ) | collect
   Assembly(read_pairs_ch)
   Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
-  filtered = Assembly.out.filteredMerged.concat(Assembly.out.filteredR1, Assembly.out.filteredR2).collectFile(name: 'filtered.fastq.gz', newLine: false)
-  pred16s = Assembly.out.pred16sMerged.concat(Assembly.out.pred16sR1, Assembly.out.pred16sR2).collectFile(name: 'pred16s.fasta', newLine: false)
-  TaxonomicClassification(filtered, pred16s)
+  TaxonomicClassification(Assembly.out.filtered, Assembly.out.pred16s)
   FunctionalAssignment(Assembly.out.contigs)
 }
 

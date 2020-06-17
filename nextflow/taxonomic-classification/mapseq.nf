@@ -12,5 +12,5 @@ workflow Mapseq {
     MapseqProc(refdb, input)
 
   emit:
-    mapseq = MapseqProc.out.taxo
+    mapseq = MapseqProc.out
 }

@@ -7,9 +7,9 @@ process Seqprep {
     tuple DATUM, path(input, stageAs: 'in/*')
 
   output:
-    path 'out/slices/*/unmerged_r1.fastq.gz', emit: unmergedR1
-    path 'out/slices/*/unmerged_r2.fastq.gz', emit: unmergedR2
-    path 'out/slices/*/merged.fastq.gz', emit: merged
+    path "out/slices/${DATUM}/unmerged_r1.fastq.gz", emit: unmergedR1
+    path "out/slices/${DATUM}/unmerged_r2.fastq.gz", emit: unmergedR2
+    path "out/slices/${DATUM}/merged.fastq.gz", emit: merged
 
   shell:
     '''

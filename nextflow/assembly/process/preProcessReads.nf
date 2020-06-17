@@ -3,7 +3,7 @@ params.PreProcessReads_slices = 4
 process PreProcessReads {
   //echo true
 
-  container 'preprocess-reads:0.1.0-SNAPSHOT'
+  container "preprocess-reads:${workflow.manifest.version}"
 
   input:
     path 'in/*'

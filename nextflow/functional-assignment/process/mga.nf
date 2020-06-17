@@ -7,17 +7,18 @@ process Mga {
     tuple DATUM, path(input, stageAs: 'in/*')
 
   output:
-    path 'out/slices/*', emit: mga
+    path "out/slices/${DATUM}", emit: mga
 
   shell:
     '''
     set +u
     OUT_DIR="out/slices/!{DATUM}"
     mkdir -p "$OUT_DIR" #requires output dir to exist
-    if [[ ! -s !{input}/contigs.fasta ]]; then
+    if [[ -s !{input}/contigs.fasta ]]; then
+      /app/mga/mga_linux_ia64 "!{input}/contigs.fasta" > "$OUT_DIR/mga.out"
+    else
+      #Deal with empty input here as mga throws Segmentation fault otherwise
       echo "Empty input"
-      exit 0
-    fi #Deal with empty input here as mga throws Segmentation fault otherwise
-    /app/mga/mga_linux_ia64 !{input}/contigs.fasta > $OUT_DIR/mga.out
+    fi
     '''
 }

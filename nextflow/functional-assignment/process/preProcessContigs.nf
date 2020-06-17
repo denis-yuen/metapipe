@@ -4,7 +4,7 @@ params.PreProcessContigs_contigsCutoff = 1000
 process PreProcessContigs {
   //echo true
 
-  container 'preprocess-contigs:0.1.0-SNAPSHOT'
+  container "preprocess-contigs:${workflow.manifest.version}"
 
   input:
     path contigs, stageAs: 'in/*'

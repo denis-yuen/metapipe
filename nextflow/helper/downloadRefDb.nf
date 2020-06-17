@@ -3,7 +3,7 @@ params.refdbDir = '/refdb'
 process DownloadRefDb {
   //echo true
 
-  container 'ref-db:0.1.0-SNAPSHOT'
+  container "ref-db:${workflow.manifest.version}"
 
   input:
     val refDb

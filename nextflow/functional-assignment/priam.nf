@@ -10,7 +10,14 @@ workflow Priam {
   main:
     refdb = DownloadRefDb(params.Priam_refdb)
     PriamSearchProc(refdb, input)
+    genomeECs = PriamSearchProc.out.genomeECs | collectFile()
+    genomeEnzymes = PriamSearchProc.out.genomeEnzymes | collectFile()
+    predictableECs = PriamSearchProc.out.predictableECs | collectFile()
+    sequenceECs = PriamSearchProc.out.sequenceECs | collectFile()
 
   emit:
-    priam = PriamSearchProc.out.priam
+    genomeECs = genomeECs
+    genomeEnzymes = genomeEnzymes
+    predictableECs = predictableECs
+    sequenceECs = sequenceECs
 }

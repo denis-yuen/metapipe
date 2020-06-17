@@ -11,24 +11,22 @@ workflow Assembly {
 
   main:
     PreProcessReads(read_pairs_ch) | flatten | map { path -> tuple(path.baseName, path) } | Seqprep
-    merged_ch = Seqprep.out.merged.collectFile(name: 'merged.fastq.gz', sort: {it.parent.baseName})
-    unmergedR1_ch = Seqprep.out.unmergedR1.collectFile(name: 'unmergedR1.fastq.gz', sort: {it.parent.baseName})
-    unmergedR2_ch = Seqprep.out.unmergedR2.collectFile(name: 'unmergedR2.fastq.gz', sort: {it.parent.baseName})
-    TrimmomaticSE(merged_ch)
-    TrimmomaticPE(unmergedR1_ch, unmergedR2_ch)
+    merged = Seqprep.out.merged.collectFile(sort: {it.parent.baseName})
+    unmergedR1 = Seqprep.out.unmergedR1.collectFile(sort: {it.parent.baseName})
+    unmergedR2 = Seqprep.out.unmergedR2.collectFile(sort: {it.parent.baseName})
+    TrimmomaticSE(merged)
+    TrimmomaticPE(unmergedR1, unmergedR2)
     TrimmomaticSE.out.merged.mix(TrimmomaticPE.out.unmergedR1,TrimmomaticPE.out.unmergedR2).map{ path -> tuple(path.simpleName, path) } | Rrnapred
     PairReads(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered)
+    filtered = Rrnapred.out.merged_filtered.concat(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered).collectFile(name: 'filtered.fastq.gz', newLine: false)
+    pred16s = Rrnapred.out.merged_pred16s.concat(Rrnapred.out.unmergedR1_pred16s, Rrnapred.out.unmergedR2_pred16s).collectFile(name: 'pred16s.fasta', newLine: false)
     Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
 
   emit:
     trimmedMerged = TrimmomaticSE.out.merged
     trimmedR1 = TrimmomaticPE.out.unmergedR1
     trimmedR2 = TrimmomaticPE.out.unmergedR2
-    filteredMerged = Rrnapred.out.merged_filtered
-    filteredR1 = Rrnapred.out.unmergedR1_filtered
-    filteredR2 = Rrnapred.out.unmergedR2_filtered
-    pred16sMerged = Rrnapred.out.merged_pred16s
-    pred16sR1 = Rrnapred.out.unmergedR1_pred16s
-    pred16sR2 = Rrnapred.out.unmergedR2_pred16s
+    filtered = filtered
+    pred16s = pred16s
     contigs = Megahit.out.contigs
 }

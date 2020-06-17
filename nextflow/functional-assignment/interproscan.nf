@@ -9,8 +9,8 @@ workflow Interproscan {
 
   main:
     refdb = DownloadRefDb(params.Interpro_refdb)
-    InterproscanProc(refdb, input)
+    interpro_ch = InterproscanProc(refdb, input) | collectFile()
 
   emit:
-    priam = InterproscanProc.out.interpro
+    interpro = interpro_ch
 }

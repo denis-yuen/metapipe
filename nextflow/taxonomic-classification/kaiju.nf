@@ -12,5 +12,5 @@ workflow Kaiju {
     KaijuProc(refdb, input)
 
   emit:
-    kaiju = KaijuProc.out.taxo
+    kaiju = KaijuProc.out
 }

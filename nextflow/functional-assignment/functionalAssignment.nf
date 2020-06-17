@@ -10,12 +10,18 @@ workflow FunctionalAssignment {
     contigs
 
   main:
-    contigs_ch = PreProcessContigs(contigs) | flatten | map { path -> tuple(path.baseName, path) }
-    mga_ch = Mga(contigs_ch) | flatten | map { path -> tuple(path.baseName, path) }
-    cds_ch = contigs_ch.join(mga_ch) | GeneExtractor | flatten | map { path -> tuple(path.baseName, path) }
-    Priam(cds_ch)
-    Diamond(cds_ch)
-    Interproscan(cds_ch)
+    contigs = PreProcessContigs(contigs) | flatten | map { path -> tuple(path.baseName, path) }
+    mga = Mga(contigs) | flatten | map { path -> tuple(path.baseName, path) }
+    cds = contigs.join(mga) | GeneExtractor | flatten | map { path -> tuple(path.baseName, path) }
+    Priam(cds)
+    Diamond(cds)
+    Interproscan(cds)
 
-  //emit:
+  emit:
+    interpro = Interproscan.out
+    diamond = Diamond.out
+    priam_genomeECs = Priam.out.genomeECs
+    priam_genomeEnzymes = Priam.out.genomeEnzymes
+    priam_predictableECs = Priam.out.predictableECs
+    priam_sequenceECs = Priam.out.sequenceECs
 }

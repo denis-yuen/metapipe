@@ -9,8 +9,8 @@ workflow Diamond {
 
   main:
     refdb = DownloadRefDb(params.Diamond_refdb)
-    DiamondProc(refdb, input)
+    diamond_ch = DiamondProc(refdb, input) | collectFile()
 
   emit:
-    priam = DiamondProc.out.diamond
+    diamond = diamond_ch
 }

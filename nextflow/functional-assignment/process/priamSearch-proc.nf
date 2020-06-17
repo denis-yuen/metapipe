@@ -8,7 +8,10 @@ process PriamSearchProc {
     tuple DATUM, path(input, stageAs: 'in/*')
 
   output:
-    path 'out/slices/*', emit: priam
+    path "out/slices/${DATUM}/genomeECs.txt", emit: genomeECs
+    path "out/slices/${DATUM}/genomeEnzymes.txt", emit: genomeEnzymes
+    path "out/slices/${DATUM}/predictableECs.txt", emit: predictableECs
+    path "out/slices/${DATUM}/sequenceECs.txt", emit: sequenceECs
 
   shell:
     '''
