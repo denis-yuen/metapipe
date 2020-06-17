@@ -11,10 +11,17 @@ process BbPileup {
   shell:
     '''
     set +u
-    if [[ -z $MK_MEM_LIMIT_BYTES ]]; then
-      XMX_FLAG="-Xmx$MK_MEM_LIMIT_BYTES"
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+          [gG]B*) UNIT=1073741824;;
+          [mM]B*) UNIT=1048576;;
+          [kK]B*) UNIT=1024;;
+          B*) UNIT=1;;
+     esac
+     MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    if [[ -z $MEMORY ]]; then
+      XMX_FLAG="-Xmx$MEMORY"
     fi
     /app/bbmap/pileup.sh in=!{alignment} out=out/coverage.txt \
-      overwrite=true threads=$MK_CPU_INT -Xms$MK_MEM_BYTES $XMX_FLAG
+      overwrite=true threads=!{task.cpus} -Xms$MEMORY $XMX_FLAG
     '''
 }

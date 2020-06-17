@@ -13,14 +13,21 @@ process GeneExtractor {
   shell:
     '''
     set +u
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
     if !{params.removeIncompleteGenes}; then
       RMV_NON_COMPLETE_FLAG="--removeNonCompleteGenes";
     else
       RMV_NON_COMPLETE_FLAG="";
     fi
-    if [[ -z $MK_MEM_LIMIT_BYTES ]]; then
-      XMX_FLAG="-J-Xmx$MK_MEM_LIMIT_BYTES"
+    if [[ -z $MEMORY ]]; then
+      XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    /opt/docker/bin/gene-extractor -J-Xms$MK_MEM_BYTES $XMX_FLAG -- --contigsPath "!{contigs}/contigs.fasta" --mgaOutPath "!{mga}/mga.out" --outPath "out/slices/!{DATUM}" $RMV_NON_COMPLETE_FLAG
+    /opt/docker/bin/gene-extractor -J-Xms$MEMORY $XMX_FLAG -- --contigsPath "!{contigs}/contigs.fasta" --mgaOutPath "!{mga}/mga.out" --outPath "out/slices/!{DATUM}" $RMV_NON_COMPLETE_FLAG
     '''
 }

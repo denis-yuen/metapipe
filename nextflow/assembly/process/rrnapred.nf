@@ -16,9 +16,16 @@ process Rrnapred {
   shell:
     '''
     set +u
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
     OUT_SPECIFIC=out/!{FILENAME}
     mkdir -p "$OUT_SPECIFIC"
-    /opt/docker/bin/rrnapred -J-Xms$MK_MEM_BYTES -J-Xmx$MK_MEM_LIMIT_BYTES -- \
-      -i !{input} --out $OUT_SPECIFIC --cpu $MK_CPU_INT
+    /opt/docker/bin/rrnapred -J-Xms$MEMORY -J-Xmx$MEMORY -- \
+      -i !{input} --out $OUT_SPECIFIC --cpu !{task.cpus}
     '''
 }

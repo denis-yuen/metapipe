@@ -11,12 +11,19 @@ process BbSketch {
   shell:
     '''
     set +u
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
     BIN_REF=$(basename !{bin} .fasta)
     BIN_OUT="${BIN_REF}.sketch"
-    if [[ -z $MK_MEM_LIMIT_BYTES ]]; then
-      XMX_FLAG="-Xmx$MK_MEM_LIMIT_BYTES"
+    if [[ -z $MEMORY ]]; then
+      XMX_FLAG="-Xmx$MEMORY"
     fi
     /app/bbmap/sendsketch.sh in=!{bin} out=out/$BIN_OUT \
-      sizemult=10 format=2 mode=single maxfraction=0.1 nt color=f -Xms$MK_MEM_BYTES $XMX_FLAG
+      sizemult=10 format=2 mode=single maxfraction=0.1 nt color=f -Xms$MEMORY $XMX_FLAG
     '''
 }

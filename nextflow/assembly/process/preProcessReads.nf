@@ -12,6 +12,13 @@ process PreProcessReads {
   shell:
     '''
     set +u
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
     FORWARD=($(find in -name "forward.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $FORWARD ]]; then
       R1_PARAM="--r1 $FORWARD"
@@ -24,10 +31,10 @@ process PreProcessReads {
     if [[ -n $INTERLEAVED ]]; then
       INTERLEAVED_PARAM="--interleaved $INTERLEAVED"
     fi
-    if [[ -n $MK_MEM_LIMIT_BYTES ]]; then
-      XMX_FLAG="-J-Xmx$MK_MEM_LIMIT_BYTES"
+    if [[ -n $MEMORY ]]; then
+      XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    /opt/docker/bin/preprocess-reads -J-Xms$MK_MEM_BYTES $XMX_FLAG -- \
+    /opt/docker/bin/preprocess-reads -J-Xms$MEMORY $XMX_FLAG -- \
       $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices !{params.slices}
     '''
 }

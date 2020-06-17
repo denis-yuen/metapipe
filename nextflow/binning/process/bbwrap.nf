@@ -15,12 +15,19 @@ process BbWrap {
   shell:
     '''
     set +u
-    if [[ -z $MK_MEM_LIMIT_BYTES ]]; then
-      XMX_FLAG="-Xmx$MK_MEM_LIMIT_BYTES"
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    if [[ -z $MEMORY ]]; then
+      XMX_FLAG="-Xmx$MEMORY"
     fi
     /app/bbmap/bbwrap.sh ref=!{ref} in=!{trimmedR1},!{merged} in2=!{trimmedR2} \
       out=out/alignment.sam.gz path=/tmp/ \
-      kfilter=22 subfilter=15 maxindel=80 qin=33 threads=$MK_CPU_INT -Xms$MK_MEM_BYTES $XMX_FLAG
+      kfilter=22 subfilter=15 maxindel=80 qin=33 threads=!{task.cpus} -Xms$MEMORY $XMX_FLAG
     #For some reason, symbolic links are not visible as outputs
     cp -r /tmp/ref/genome out/genomes
     '''

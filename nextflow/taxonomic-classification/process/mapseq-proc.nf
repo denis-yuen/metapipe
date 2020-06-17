@@ -17,6 +17,6 @@ process MapseqProc {
       DB="${DB_PATH}/silvamar.fasta ${DB_PATH}/silvamar.tax"
     fi
     mkdir -p out
-    /app/mapseq/mapseq -nthreads $MK_CPU_INT !{input} ${DB} > out/mapseq.out
+    /app/mapseq/mapseq -nthreads !{task.cpus} !{input} ${DB} > out/mapseq.out
     '''
 }

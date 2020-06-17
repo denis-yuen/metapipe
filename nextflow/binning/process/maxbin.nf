@@ -14,6 +14,6 @@ process Maxbin {
     set +u
     tail -n +2 !{coverage} | cut -f1,2 > /tmp/abundance_contigs.txt
     mkdir -p out
-    /app/maxbin/run_MaxBin.pl -thread $MK_CPU_INT -contig !{contigs} -abund /tmp/abundance_contigs.txt -out out/bin
+    /app/maxbin/run_MaxBin.pl -thread !{task.cpus} -contig !{contigs} -abund /tmp/abundance_contigs.txt -out out/bin
     '''
 }

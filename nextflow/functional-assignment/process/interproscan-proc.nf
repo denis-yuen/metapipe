@@ -16,6 +16,13 @@ process InterproscanProc {
   shell:
     '''
     set +u
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
     #Interproscan expects the tools at this location
     ln -s "!{refdb}/db/interpro" /app/interpro/data
     OUT_DIR="out/slices/!{DATUM}"
@@ -34,12 +41,12 @@ process InterproscanProc {
     cat /app/interpro/interproscan.properties
     #If XMX is defined, we  replace the the value found in interpro.sh (tricky because there are several instance of -Xmx in the file and we only want to replace the last one)
     #In the end we do not mv interpro.sh.tmp to interpro.sh because that would remove the execute flag (and possibly change some other rights)
-    if [[ -n $MK_MEM_LIMIT_BYTES ]]; then
-      sed -r "$(sed -n -r '/.*-Xmx[0-9]+[A-Z].*/ =' /app/interpro/interproscan.sh | tail -n 1)"'s/(.*-Xmx)([0-9]+[A-Z])(.*)/\\1'"${MK_MEM_LIMIT_BYTES}"'\\3/' /app/interpro/interproscan.sh > /app/interpro/interproscan.sh.tmp
+    if [[ -n $MEMORY ]]; then
+      sed -r "$(sed -n -r '/.*-Xmx[0-9]+[A-Z].*/ =' /app/interpro/interproscan.sh | tail -n 1)"'s/(.*-Xmx)([0-9]+[A-Z])(.*)/\\1'"${MEMORY}"'\\3/' /app/interpro/interproscan.sh > /app/interpro/interproscan.sh.tmp
       cat /app/interpro/interproscan.sh.tmp > /app/interpro/interproscan.sh && rm /app/interpro/interproscan.sh.tmp
     fi
-    if [[ -n $MK_MEM_LIMIT_BYTES ]]; then
-      sed -r "$(sed -n -r '/.*-Xms[0-9]+[A-Z].*/ =' /app/interpro/interproscan.sh | tail -n 1)"'s/(.*-Xms)([0-9]+[A-Z])(.*)/\\1'"${MK_MEM_BYTES}"'\\3/' /app/interpro/interproscan.sh > /app/interpro/interproscan.sh.tmp
+    if [[ -n $MEMORY ]]; then
+      sed -r "$(sed -n -r '/.*-Xms[0-9]+[A-Z].*/ =' /app/interpro/interproscan.sh | tail -n 1)"'s/(.*-Xms)([0-9]+[A-Z])(.*)/\\1'"${MEMORY}"'\\3/' /app/interpro/interproscan.sh > /app/interpro/interproscan.sh.tmp
       cat /app/interpro/interproscan.sh.tmp > /app/interpro/interproscan.sh && rm /app/interpro/interproscan.sh.tmp
     fi
     cat /app/interpro/interproscan.sh

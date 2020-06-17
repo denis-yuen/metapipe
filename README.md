@@ -54,3 +54,8 @@ Clone the repo, then:
 mkdir -p target && cd target
 nextflow run .. [options]
 ```
+
+#### Advanced configuration
+
+In case of warning: `WARNING: Your kernel does not support swap limit capabilities or the cgroup is not mounted. Memory limited without swap.`:
+[see here](https://www.serverlab.ca/tutorials/containers/docker/how-to-limit-memory-and-cpu-for-docker-containers/).

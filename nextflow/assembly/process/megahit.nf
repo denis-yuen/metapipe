@@ -15,11 +15,18 @@ process Megahit {
   shell:
     '''
     set +u
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
     mkdir -p out
     #Note: -o must not exist. That is why we use -o /tmp/temp
     /app/megahit/bin/megahit -1 !{inputR1} -2 !{inputR2} -r !{inputMerged} -o /tmp/temp \
       --min-contig-len !{params.contigsCutoff} \
-      -t $MK_CPU_INT -m $MK_MEM_BYTES
+      -t !{task.cpus} -m $MEMORY
     RES=$?
     cat /tmp/temp/options.json && echo
     if [[ $RES == 0 ]]; then

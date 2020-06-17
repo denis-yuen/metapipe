@@ -14,9 +14,16 @@ process PreProcessContigs {
   shell:
     '''
     set +u
-    if [[ -z $MK_MEM_LIMIT_BYTES ]]; then
-      XMX_FLAG="-J-Xmx$MK_MEM_LIMIT_BYTES"
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    if [[ -z $MEMORY ]]; then
+      XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    /opt/docker/bin/preprocess-contigs -J-Xms$MK_MEM_BYTES $XMX_FLAG -- --inputPath "!{contigs}" --outPath out/slices --contigsCutoff "!{params.contigsCutoff}" --slices "!{params.slices}"
+    /opt/docker/bin/preprocess-contigs -J-Xms$MEMORY $XMX_FLAG -- --inputPath "!{contigs}" --outPath out/slices --contigsCutoff "!{params.contigsCutoff}" --slices "!{params.slices}"
     '''
 }

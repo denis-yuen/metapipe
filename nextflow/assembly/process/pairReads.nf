@@ -13,7 +13,14 @@ process PairReads {
   shell:
     '''
     set +u
-    /opt/docker/bin/preprocess-reads -J-Xms$MK_MEM_BYTES -J-Xmx$MK_MEM_LIMIT_BYTES -- \
+    case $(echo "!{task.memory}" | cut -d' ' -f2) in
+         [gG]B*) UNIT=1073741824;;
+         [mM]B*) UNIT=1048576;;
+         [kK]B*) UNIT=1024;;
+         B*) UNIT=1;;
+    esac
+    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    /opt/docker/bin/preprocess-reads -J-Xms$MEMORY -J-Xmx$MEMORY -- \
       --r1 !{inputR1} --r2 !{inputR2} --outputDir out --tmpDir /tmp/temp --slices 0
     '''
 }
