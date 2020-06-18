@@ -1,8 +1,10 @@
 params.refdbDir = '/refdb'
 
 process DownloadRefDb {
+  label 'helper'
 
   container "ref-db:${workflow.manifest.version}"
+  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
 
   input:
     val refDb
@@ -19,7 +21,7 @@ process DownloadRefDb {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     IFS=':' read -ra DB_SPLIT <<< "!{refDb}"
     DB_NAME="${DB_SPLIT[0]}"
     DB_VERSION="${DB_SPLIT[1]}"
@@ -30,7 +32,8 @@ process DownloadRefDb {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    /opt/docker/bin/ref-db -J-Xms$MEMORY $XMX_FLAG -- download -d !{params.refdbDir} ${DB_NAME}=${DB_VERSION}
     refdbPath="!{params.refdbDir}/$DB_NAME/$DB_VERSION"
+    set +x
+    /opt/docker/bin/ref-db -J-Xms$MEMORY $XMX_FLAG -- download -d !{params.refdbDir} ${DB_NAME}=${DB_VERSION}
     '''
 }

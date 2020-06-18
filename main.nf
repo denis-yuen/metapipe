@@ -6,39 +6,30 @@ nextflow.preview.dsl = 2
  * Default pipeline parameters. They can be overridden on the command line eg.
  * given `params.foo` specify on the run command line `--foo some_value`.
  */
+params.metapipeDir = "/home/.metapipe"
 params.reads = "$baseDir/test/resources/datasets/default_reads_fastq"
-params.assembly_slices = 4
 params.readsCutoff = 75
 params.contigsCutoff = 1000
 params.kaiju_refdb = 'kaiju-mardb:1.7.2'                 //'kaiju-refseq:1.7.2'
 params.mapseq_refdb = 'silvamar:4'                       //':'
-params.functionalAnnotation_slices = 4
 params.functionalAnnotation_removeIncompleteGenes = false
 params.diamond_refdb = 'diamond-marref-proteins:4'       //'diamond-uniref50:2019-06'
 params.diamond_sensitivity = 'sensitive'                 //''|'more-sensitive'
 params.interpro_refdb = 'interpro:5.42-78.0'
-params.interpro_toolsCpu = 1
-params.interpro_maxWorkers = 3
-params.interpro_precalcService = ''
 params.priam_refdb = 'priam:JAN18'
 
 log.info """
  M E T A P I P E
  ===================================
  reads: ${params.reads}
- assembly_slices: ${params.assembly_slices}
  readsCutoff: ${params.readsCutoff}
  contigsCutoff: ${params.contigsCutoff}
  kaiju_refdb: ${params.kaiju_refdb}
  mapseq_refdb: ${params.mapseq_refdb}
- functionalAnnotation_slices: ${params.functionalAnnotation_slices}
  functionalAnnotation_removeIncompleteGenes: ${params.functionalAnnotation_removeIncompleteGenes}
  diamond_refdb: ${params.diamond_refdb}
  diamond_sensitivity: ${params.diamond_sensitivity}
  interpro_refdb: ${params.interpro_refdb}
- interpro_toolsCpu: ${params.interpro_toolsCpu}
- interpro_maxWorkers: ${params.interpro_maxWorkers}
- interpro_precalcService: ${params.interpro_precalcService}
  priam_refdb: ${params.priam_refdb}
  """
 

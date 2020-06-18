@@ -1,8 +1,11 @@
 params.sensitivity = 'sensitive'
 
 process DiamondProc {
+  label 'functional_assignment'
+  tag "$DATUM"
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/diamond:0.9.31'
+  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
 
   input:
     val refdb
@@ -36,6 +39,7 @@ process DiamondProc {
         SENSITIVE_FLAG=""
         ;;
     esac
+    set +x
     /app/diamond/diamond blastp -d "$DB_PATH" -q "!{input}/cds.prot.fasta" -o "$OUT_DIR/diamond.out" -k 5 -p !{task.cpus} -c 4 -b 1 $SENSITIVE_FLAG --outfmt $OUT_FMT
     '''
 }

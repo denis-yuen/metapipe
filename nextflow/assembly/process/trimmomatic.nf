@@ -1,6 +1,7 @@
 params.readsCutoff = 75
 
 process TrimmomaticSE {
+  label 'assembly'
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/trimmomatic:0.39'
 
@@ -19,17 +20,19 @@ process TrimmomaticSE {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     if [[ -n $MEMORY ]]; then
       XMX_FLAG="-Xmx$MEMORY"
     fi
     mkdir -p out
+    set +x
     java -Xms$MEMORY $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar \
       SE -threads !{task.cpus} -phred33 in/merged.fastq.gz out/merged.fastq.gz AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:!{params.readsCutoff}
     '''
 }
 
 process TrimmomaticPE {
+  label 'assembly'
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/trimmomatic:0.39'
 
@@ -50,11 +53,12 @@ process TrimmomaticPE {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     if [[ -n $MEMORY ]]; then
       XMX_FLAG="-Xmx$MEMORY"
     fi
     mkdir -p out
+    set +x
     java -Xms$MEMORY $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar \
       PE -threads !{task.cpus} -phred33 in/unmergedR1.fastq.gz in/unmergedR2.fastq.gz \
       out/unmerged_r1.fastq.gz /dev/null out/unmerged_r2.fastq.gz /dev/null AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:!{params.readsCutoff}

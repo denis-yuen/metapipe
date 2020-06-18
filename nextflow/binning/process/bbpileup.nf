@@ -1,4 +1,5 @@
 process BbPileup {
+  label 'binning'
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/bbmap:38.79'
 
@@ -17,10 +18,11 @@ process BbPileup {
           [kK]B*) UNIT=1024;;
           B*) UNIT=1;;
      esac
-     MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+     MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-Xmx$MEMORY"
     fi
+    set +x
     /app/bbmap/pileup.sh in=!{alignment} out=out/coverage.txt \
       overwrite=true threads=!{task.cpus} -Xms$MEMORY $XMX_FLAG
     '''

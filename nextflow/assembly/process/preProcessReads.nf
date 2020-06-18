@@ -1,6 +1,6 @@
-params.slices = 4
-
 process PreProcessReads {
+  label 'assembly'
+
   container "preprocess-reads:${workflow.manifest.version}"
 
   input:
@@ -18,7 +18,7 @@ process PreProcessReads {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     FORWARD=($(find in -name "forward.fastq*" \\( -type f -or -type l \\) ))
     if [[ -n $FORWARD ]]; then
       R1_PARAM="--r1 $FORWARD"
@@ -34,7 +34,8 @@ process PreProcessReads {
     if [[ -n $MEMORY ]]; then
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
+    set +x
     /opt/docker/bin/preprocess-reads -J-Xms$MEMORY $XMX_FLAG -- \
-      $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices !{params.slices}
+      $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices !{task.ext.slices}
     '''
 }

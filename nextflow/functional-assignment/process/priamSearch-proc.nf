@@ -1,6 +1,9 @@
 process PriamSearchProc {
+  label 'functional_assignment'
+  tag "$DATUM"
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/priamsearch:2.0'
+  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
 
   input:
     val refdb
@@ -21,12 +24,14 @@ process PriamSearchProc {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     DB_PATH="!{refdb}/db/priam/"
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-Xmx$MEMORY"
     fi
+    set +x
     java -Xms$MEMORY $XMX_FLAG -jar /app/priamsearch/PRIAM_search.jar -p "$DB_PATH" -np 1 -pt 0.5 -mp 70 -cc T -cg F -n mp -i "!{input}/cds.prot.fasta" --out /tmp
+    set -x
     mkdir -p out/slices && mv /tmp/PRIAM_mp/ANNOTATION out/slices/!{DATUM}
     '''
 }

@@ -1,4 +1,6 @@
 process Mga {
+  label 'functional_assignment'
+  tag "$DATUM"
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/mga:1'
 
@@ -14,6 +16,7 @@ process Mga {
     OUT_DIR="out/slices/!{DATUM}"
     mkdir -p "$OUT_DIR" #requires output dir to exist
     if [[ -s !{input}/contigs.fasta ]]; then
+      set +x
       /app/mga/mga_linux_ia64 "!{input}/contigs.fasta" > "$OUT_DIR/mga.out"
     else
       #Deal with empty input here as mga throws Segmentation fault otherwise

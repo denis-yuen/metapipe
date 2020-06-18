@@ -1,6 +1,8 @@
 params.removeIncompleteGenes = false
 
 process GeneExtractor {
+  label 'functional_assignment'
+  tag "$DATUM"
 
   container "gene-extractor:${workflow.manifest.version}"
 
@@ -19,7 +21,7 @@ process GeneExtractor {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     if !{params.removeIncompleteGenes}; then
       RMV_NON_COMPLETE_FLAG="--removeNonCompleteGenes";
     else
@@ -28,6 +30,7 @@ process GeneExtractor {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
+    set +x
     /opt/docker/bin/gene-extractor -J-Xms$MEMORY $XMX_FLAG -- --contigsPath "!{contigs}/contigs.fasta" --mgaOutPath "!{mga}/mga.out" --outPath "out/slices/!{DATUM}" $RMV_NON_COMPLETE_FLAG
     '''
 }

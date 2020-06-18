@@ -1,4 +1,6 @@
 process Rrnapred {
+  label 'assembly'
+  tag "${FILENAME}"
 
   container "rrnapred:${workflow.manifest.version}"
 
@@ -22,9 +24,10 @@ process Rrnapred {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     OUT_SPECIFIC=out/!{FILENAME}
     mkdir -p "$OUT_SPECIFIC"
+    set +x
     /opt/docker/bin/rrnapred -J-Xms$MEMORY -J-Xmx$MEMORY -- \
       -i !{input} --out $OUT_SPECIFIC --cpu !{task.cpus}
     '''

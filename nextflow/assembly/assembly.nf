@@ -1,4 +1,4 @@
-include {PreProcessReads} from './process/preProcessReads.nf' params(slices: params.assembly_slices)
+include {PreProcessReads} from './process/preProcessReads.nf' params()
 include {Seqprep} from './process/seqprep.nf'
 include {TrimmomaticSE; TrimmomaticPE} from './process/trimmomatic.nf' params(readsCutoff: params.readsCutoff)
 include {Rrnapred} from './process/rrnapred.nf'

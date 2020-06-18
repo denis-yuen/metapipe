@@ -1,7 +1,7 @@
-params.slices = 4
 params.contigsCutoff = 1000
 
 process PreProcessContigs {
+  label 'functional_assignment'
 
   container "preprocess-contigs:${workflow.manifest.version}"
 
@@ -20,10 +20,11 @@ process PreProcessContigs {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    /opt/docker/bin/preprocess-contigs -J-Xms$MEMORY $XMX_FLAG -- --inputPath "!{contigs}" --outPath out/slices --contigsCutoff "!{params.contigsCutoff}" --slices "!{params.slices}"
+    set +x
+    /opt/docker/bin/preprocess-contigs -J-Xms$MEMORY $XMX_FLAG -- --inputPath "!{contigs}" --outPath out/slices --contigsCutoff "!{params.contigsCutoff}" --slices "!{task.ext.slices}"
     '''
 }

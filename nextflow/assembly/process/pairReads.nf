@@ -1,4 +1,5 @@
 process PairReads {
+  label 'assembly'
 
   container "preprocess-reads:${workflow.manifest.version}"
 
@@ -19,7 +20,8 @@ process PairReads {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
+    set +x
     /opt/docker/bin/preprocess-reads -J-Xms$MEMORY -J-Xmx$MEMORY -- \
       --r1 !{inputR1} --r2 !{inputR2} --outputDir out --tmpDir /tmp/temp --slices 0
     '''

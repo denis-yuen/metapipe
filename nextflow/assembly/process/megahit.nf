@@ -1,6 +1,7 @@
 params.contigsCutoff = 1000
 
 process Megahit {
+  label 'assembly'
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/megahit:1.2.9'
 
@@ -21,13 +22,15 @@ process Megahit {
          [kK]B*) UNIT=1024;;
          B*) UNIT=1;;
     esac
-    MEMORY=$(( $(echo "!{task.memory}" | awk '{printf "%.0f", $1}') * $UNIT ))
+    MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     mkdir -p out
     #Note: -o must not exist. That is why we use -o /tmp/temp
+    set +x
     /app/megahit/bin/megahit -1 !{inputR1} -2 !{inputR2} -r !{inputMerged} -o /tmp/temp \
       --min-contig-len !{params.contigsCutoff} \
       -t !{task.cpus} -m $MEMORY
     RES=$?
+    set -x
     cat /tmp/temp/options.json && echo
     if [[ $RES == 0 ]]; then
       #For some reason, symbolic links are not visible as outputs
