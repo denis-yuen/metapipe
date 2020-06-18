@@ -29,8 +29,8 @@ For instance, the *Marine* profile uses exclusively the high quality [MAR databa
 
 ### Requirements
 
-- Metapipe is based on [Nextflow](https://www.nextflow.io/docs/latest/index.html) ([Install instructions](https://www.nextflow.io/docs/latest/getstarted.html#installation)).
-- [Nextflow requirements](https://www.nextflow.io/docs/latest/getstarted.html#requirements)
+- [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation) ([requirements](https://www.nextflow.io/docs/latest/getstarted.html#requirements))
+- [Docker](https://docs.docker.com/get-docker/)
 
 ### Executing the workflow
 
