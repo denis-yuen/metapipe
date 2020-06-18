@@ -7,7 +7,7 @@ nextflow.preview.dsl = 2
  * given `params.foo` specify on the run command line `--foo some_value`.
  */
 params.metapipeDir = "/home/.metapipe"
-params.reads = "$baseDir/test/resources/datasets/default_reads_fastq"
+params.reads = "${baseDir}/test/resources/datasets/default_reads_fastq/{forward,reverse}.fastq*"
 params.readsCutoff = 75
 params.contigsCutoff = 1000
 params.kaiju_refdb = 'kaiju-mardb:1.7.2'                 //'kaiju-refseq:1.7.2'
@@ -40,7 +40,7 @@ include {TaxonomicClassification} from './nextflow/taxonomic-classification/taxo
 include {FunctionalAssignment} from './nextflow/functional-assignment/functionalAssignment.nf'
 
 workflow {
-  read_pairs_ch = Channel.fromPath( params.reads + '/*.fastq*', checkIfExists: true ) | collect
+  read_pairs_ch = Channel.fromPath(params.reads, checkIfExists: true).take(2).toSortedList() | view
   Assembly(read_pairs_ch)
   Binning(Assembly.out.contigs, Assembly.out.trimmedMerged, Assembly.out.trimmedR1, Assembly.out.trimmedR2)
   TaxonomicClassification(Assembly.out.filtered, Assembly.out.pred16s)

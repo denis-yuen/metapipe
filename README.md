@@ -36,12 +36,16 @@ For instance, the *Marine* profile uses exclusively the high quality [MAR databa
 
 ```bash
 #Optional, only to fetch changes from repository
-nextflow pull gitlab.com/uit-sfb/metapipe
-nextflow run gitlab.com/uit-sfb/metapipe [options]
+nextflow pull http://gitlab.com/uit-sfb/metapipe
+nextflow run http://gitlab.com/uit-sfb/metapipe --reads "/path/to/{r1,r2}.fastq*" [options]
 ```
 
+Note: the `--reads` parameters is a glob matching both forward and reverse FASTQ files (`.gz` are also accepted).
+Forward and reverse are determined by looking at the lexicographic order of the files path: forward < reverse.
+Note that the quotes are compulsory if the glob contains a `*`.
+
 Some useful options:
-- `--paramName <paramValue>...`: to provide parameters (the list of parameters is available in [main.nf](main.nf)).
+- `--paramName <paramValue>...`: to provide parameters (the list of parameters is available in [main.nf](main.nf))
 - `-c <configFile>`: to provide config file (overlayed on top of [nextflow.config](nextflow.config))
 - `-resume`: to use cached results
 - `-with-trace`: to generate a trace (text)
