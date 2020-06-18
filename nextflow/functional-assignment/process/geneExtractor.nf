@@ -30,7 +30,7 @@ process GeneExtractor {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    set +x
+    set -x
     /opt/docker/bin/gene-extractor -J-Xms$MEMORY $XMX_FLAG -- --contigsPath "!{contigs}/contigs.fasta" --mgaOutPath "!{mga}/mga.out" --outPath "out/slices/!{DATUM}" $RMV_NON_COMPLETE_FLAG
     '''
 }

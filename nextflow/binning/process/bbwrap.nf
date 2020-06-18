@@ -26,7 +26,7 @@ process BbWrap {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-Xmx$MEMORY"
     fi
-    set +x
+    set -x
     /app/bbmap/bbwrap.sh ref=!{ref} in=!{trimmedR1},!{merged} in2=!{trimmedR2} \
       out=out/alignment.sam.gz path=/tmp/ \
       kfilter=22 subfilter=15 maxindel=80 qin=33 threads=!{task.cpus} -Xms$MEMORY $XMX_FLAG

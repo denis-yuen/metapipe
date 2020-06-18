@@ -17,7 +17,7 @@ process Seqprep {
     set +u
     OUT_DIR="out/slices/!{DATUM}"
     mkdir -p "$OUT_DIR" #seqprep requires output dir to exist
-    set +x
+    set -x
     /app/seqprep/SeqPrep \
       -f !{input}/r1.fastq.gz \
       -r !{input}/r2.fastq.gz \

@@ -24,7 +24,7 @@ process PreProcessContigs {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    set +x
+    set -x
     /opt/docker/bin/preprocess-contigs -J-Xms$MEMORY $XMX_FLAG -- --inputPath "!{contigs}" --outPath out/slices --contigsCutoff "!{params.contigsCutoff}" --slices "!{task.ext.slices}"
     '''
 }

@@ -19,7 +19,7 @@ process MapseqProc {
       DB="${DB_PATH}/silvamar.fasta ${DB_PATH}/silvamar.tax"
     fi
     mkdir -p out
-    set +x
+    set -x
     /app/mapseq/mapseq -nthreads !{task.cpus} !{input} ${DB} > out/mapseq.out
     '''
 }

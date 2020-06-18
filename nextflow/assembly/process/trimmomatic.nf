@@ -25,7 +25,7 @@ process TrimmomaticSE {
       XMX_FLAG="-Xmx$MEMORY"
     fi
     mkdir -p out
-    set +x
+    set -x
     java -Xms$MEMORY $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar \
       SE -threads !{task.cpus} -phred33 in/merged.fastq.gz out/merged.fastq.gz AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:!{params.readsCutoff}
     '''
@@ -58,7 +58,7 @@ process TrimmomaticPE {
       XMX_FLAG="-Xmx$MEMORY"
     fi
     mkdir -p out
-    set +x
+    set -x
     java -Xms$MEMORY $XMX_FLAG -jar /app/trimmomatic/trimmomatic.jar \
       PE -threads !{task.cpus} -phred33 in/unmergedR1.fastq.gz in/unmergedR2.fastq.gz \
       out/unmerged_r1.fastq.gz /dev/null out/unmerged_r2.fastq.gz /dev/null AVGQUAL:20 SLIDINGWINDOW:4:15 MINLEN:!{params.readsCutoff}

@@ -25,12 +25,12 @@ process Megahit {
     MEMORY=$(( $(echo "!{task.memory}" | cut -d '.' -f1 | cut -d ' ' -f1) * $UNIT ))
     mkdir -p out
     #Note: -o must not exist. That is why we use -o /tmp/temp
-    set +x
+    set -x
     /app/megahit/bin/megahit -1 !{inputR1} -2 !{inputR2} -r !{inputMerged} -o /tmp/temp \
       --min-contig-len !{params.contigsCutoff} \
       -t !{task.cpus} -m $MEMORY
     RES=$?
-    set -x
+    set +x
     cat /tmp/temp/options.json && echo
     if [[ $RES == 0 ]]; then
       #For some reason, symbolic links are not visible as outputs

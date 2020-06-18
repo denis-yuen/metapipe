@@ -25,7 +25,7 @@ process BbSketch {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-Xmx$MEMORY"
     fi
-    set +x
+    set -x
     /app/bbmap/sendsketch.sh in=!{bin} out=out/$BIN_OUT \
       sizemult=10 format=2 mode=single maxfraction=0.1 nt color=f -Xms$MEMORY $XMX_FLAG
     '''

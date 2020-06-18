@@ -22,7 +22,7 @@ process BbPileup {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-Xmx$MEMORY"
     fi
-    set +x
+    set -x
     /app/bbmap/pileup.sh in=!{alignment} out=out/coverage.txt \
       overwrite=true threads=!{task.cpus} -Xms$MEMORY $XMX_FLAG
     '''

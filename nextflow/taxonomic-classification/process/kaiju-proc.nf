@@ -18,7 +18,7 @@ process KaijuProc {
     set +u
     mkdir -p out
     DB_PATH="!{refdb}/db/kaiju/$(ls "!{refdb}/db/kaiju")"
-    set +x
+    set -x
     /app/kaiju/kaiju -t $DB_PATH/nodes.dmp -f $DB_PATH/*.fmi \
       -i !{input} -o out/kaiju.out -z !{task.cpus}
     '''

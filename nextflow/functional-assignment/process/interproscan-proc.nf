@@ -51,7 +51,7 @@ process InterproscanProc {
       cat /app/interpro/interproscan.sh.tmp > /app/interpro/interproscan.sh && rm /app/interpro/interproscan.sh.tmp
     fi
     cat /app/interpro/interproscan.sh
-    set +x
+    set -x
     /app/interpro/interproscan.sh -goterms -iprlookup -f tsv --applications TIGRFAM,PRODOM,SMART,ProSiteProfiles,ProSitePatterns,HAMAP,SUPERFAMILY,PRINTS,GENE3D,PIRSF,COILS \
       -i "!{input}/cds.prot.fasta" -o "$OUT_DIR/interpro.out" --tempdir /tmp/temp --cpu $MAX_WORKERS
     '''

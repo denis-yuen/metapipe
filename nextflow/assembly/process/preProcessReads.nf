@@ -34,7 +34,7 @@ process PreProcessReads {
     if [[ -n $MEMORY ]]; then
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    set +x
+    set -x
     /opt/docker/bin/preprocess-reads -J-Xms$MEMORY $XMX_FLAG -- \
       $R1_PARAM $R2_PARAM $INTERLEAVED_PARAM --outputDir out/slices --tmpDir /tmp --slices !{task.ext.slices}
     '''

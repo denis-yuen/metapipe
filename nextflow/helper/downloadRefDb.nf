@@ -33,7 +33,7 @@ process DownloadRefDb {
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
     refdbPath="!{params.refdbDir}/$DB_NAME/$DB_VERSION"
-    set +x
+    set -x
     /opt/docker/bin/ref-db -J-Xms$MEMORY $XMX_FLAG -- download -d !{params.refdbDir} ${DB_NAME}=${DB_VERSION}
     '''
 }

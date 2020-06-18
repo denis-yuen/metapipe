@@ -39,7 +39,7 @@ process DiamondProc {
         SENSITIVE_FLAG=""
         ;;
     esac
-    set +x
+    set -x
     /app/diamond/diamond blastp -d "$DB_PATH" -q "!{input}/cds.prot.fasta" -o "$OUT_DIR/diamond.out" -k 5 -p !{task.cpus} -c 4 -b 1 $SENSITIVE_FLAG --outfmt $OUT_FMT
     '''
 }
