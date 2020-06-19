@@ -38,10 +38,10 @@ Metapipe:FunctionalAssignment:PreProcessContigs	aggregatedOutput	contigs.fasta	3
 Metapipe:FunctionalAssignment:Mga	aggregatedOutput	mga.out	44617	5
 Metapipe:FunctionalAssignment:GeneExtractor	aggregatedOutput	cds.prot.fasta	119025	5
 
-Metapipe:FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	genomeECs.txt	227513	5
-Metapipe:FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	genomeEnzymes.txt	32353	5
-Metapipe:FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	predictableECs.txt	171284	5
-Metapipe:FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	sequenceECs.txt	43066	5
+Metapipe:FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	genomeECs.txt	227513	10
+Metapipe:FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	genomeEnzymes.txt	32353	10
+Metapipe:FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	predictableECs.txt	171284	10
+Metapipe:FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	sequenceECs.txt	43066	10
 
 Metapipe:FunctionalAssignment:Diamond:DiamondProc	aggregatedOutput	diamond.out	314458	10
 
