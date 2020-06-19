@@ -3,7 +3,7 @@ process KaijuProc {
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/kaiju:1.7.3'
   containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
-  memory { "$dbsize".toLong().B + 1.GB }
+  memory { "$dbsize".toLong().B + 4.GB }
 
   input:
     val refdb
