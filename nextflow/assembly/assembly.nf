@@ -21,6 +21,7 @@ workflow Assembly {
     filtered = Rrnapred.out.merged_filtered.concat(Rrnapred.out.unmergedR1_filtered, Rrnapred.out.unmergedR2_filtered).collectFile(name: 'filtered.fastq.gz', newLine: false)
     pred16s = Rrnapred.out.merged_pred16s.concat(Rrnapred.out.unmergedR1_pred16s, Rrnapred.out.unmergedR2_pred16s).collectFile(name: 'pred16s.fasta', newLine: false)
     Megahit(PairReads.out.r1, PairReads.out.r2, Rrnapred.out.merged_filtered)
+    export_ch = filtered.mix(pred16s, Megahit.out.contigs)
 
   emit:
     trimmedMerged = TrimmomaticSE.out.merged
@@ -29,4 +30,5 @@ workflow Assembly {
     filtered = filtered
     pred16s = pred16s
     contigs = Megahit.out.contigs
+    export = export_ch
 }

@@ -1,4 +1,4 @@
-test full1:
+test reads:
   stage: test
   tags:
     - test-server

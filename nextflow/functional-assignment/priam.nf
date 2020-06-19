@@ -14,10 +14,8 @@ workflow Priam {
     genomeEnzymes = PriamSearchProc.out.genomeEnzymes | collectFile()
     predictableECs = PriamSearchProc.out.predictableECs | collectFile()
     sequenceECs = PriamSearchProc.out.sequenceECs | collectFile()
+    priam = genomeECs.mix(genomeEnzymes, predictableECs, sequenceECs)
 
   emit:
-    genomeECs = genomeECs
-    genomeEnzymes = genomeEnzymes
-    predictableECs = predictableECs
-    sequenceECs = sequenceECs
+    priam = priam
 }

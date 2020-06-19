@@ -19,7 +19,7 @@ Assembly:PairReads	hasOutput	r2.fastq.gz	760021	5
 Assembly:Megahit	hasOutput	contigs.fasta	387811	5
 
 
-Binning:BbWrap	hasOutput	alignment.sam.gz	2119185	5
+Binning:BbWrap	hasOutput	alignment.sam.gz	2119185	10
 
 Binning:BbPileup	aggregatedOutput	coverage.txt	22369	5
 
@@ -29,7 +29,7 @@ Binning:Maxbin	aggregatedOutput	.fasta	370156	5
 
 Binning:BbSketch	atLeastOneHasOutput	bin.001.sketch
 Binning:BbSketch	atLeastOneHasOutput	bin.002.sketch
-Binning:BbSketch	aggregatedOutput	.sketch	2372	5
+Binning:BbSketch	aggregatedOutput	.sketch	2372	10
 
 TaxonomicClassification:Kaiju:KaijuProc	hasOutput	kaiju.out	3077293	5
 TaxonomicClassification:Mapseq:MapseqProc	hasOutput	mapseq.out	235055	5
@@ -43,6 +43,6 @@ FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	genomeEnzymes.txt	32
 FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	predictableECs.txt	171284	5
 FunctionalAssignment:Priam:PriamSearchProc	aggregatedOutput	sequenceECs.txt	43066	5
 
-FunctionalAssignment:Diamond:DiamondProc	aggregatedOutput	diamond.out	314458	5
+FunctionalAssignment:Diamond:DiamondProc	aggregatedOutput	diamond.out	314458	10
 
 FunctionalAssignment:Interproscan:InterproscanProc	aggregatedOutput	interpro.out	219603	5

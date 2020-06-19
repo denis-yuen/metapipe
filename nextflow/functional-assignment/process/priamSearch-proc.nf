@@ -29,7 +29,7 @@ process PriamSearchProc {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-Xmx$MEMORY"
     fi
-    set -x
+    set +x
     java -Xms$MEMORY $XMX_FLAG -jar /app/priamsearch/PRIAM_search.jar -p "$DB_PATH" -np 1 -pt 0.5 -mp 70 -cc T -cg F -n mp -i "!{input}/cds.prot.fasta" --out /tmp
     set +x
     mkdir -p out/slices && mv /tmp/PRIAM_mp/ANNOTATION out/slices/!{DATUM}

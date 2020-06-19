@@ -16,12 +16,8 @@ workflow FunctionalAssignment {
     Priam(cds)
     Diamond(cds)
     Interproscan(cds)
+    export_ch = Diamond.out.mix(Priam.out, Interproscan.out)
 
   emit:
-    interpro = Interproscan.out
-    diamond = Diamond.out
-    priam_genomeECs = Priam.out.genomeECs
-    priam_genomeEnzymes = Priam.out.genomeEnzymes
-    priam_predictableECs = Priam.out.predictableECs
-    priam_sequenceECs = Priam.out.sequenceECs
+    export = export_ch
 }

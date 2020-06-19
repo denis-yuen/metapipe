@@ -14,7 +14,9 @@ workflow Binning {
     BbWrap(contigs, trimmedMerged, trimmedR1, trimmedR2)
     BbPileup(BbWrap.out.alignment)
     Maxbin(contigs, BbPileup.out.coverage) | flatten | BbSketch
+    export_ch = BbSketch.out.bin
 
   emit:
     bins = BbSketch.out.bin
+    export = export_ch
 }
