@@ -35,16 +35,15 @@ For instance, the *Marine* profile uses exclusively the high quality [MAR databa
 ### Executing the workflow
 
 ```bash
-#Optional, only to fetch changes from repository
-nextflow pull http://gitlab.com/uit-sfb/metapipe
-nextflow run http://gitlab.com/uit-sfb/metapipe --reads "/path/to/{r1,r2}.fastq*" [options]
+nextflow run http://gitlab.com/uit-sfb/metapipe -r <version> --reads "/path/to/{r1,r2}.fastq*" [options]
 ```
 
-Note: the `--reads` parameters is a glob matching both forward and reverse FASTQ files (`.gz` are also accepted).
-Forward and reverse are determined by looking at the lexicographic order of the file's path: forward < reverse.
+Notes:
+- replace `version` with one of the versions found [here](https://gitlab.com/uit-sfb/metapipe/-/releases) (for instance `0.1.0`)
+- the `--reads` parameters is a glob matching both forward and reverse FASTQ files (`.gz` are also accepted).
+Forward and reverse are determined by looking at the lexicographic order of the file's path: forward < reverse.  
 Note that the quotes are compulsory if the glob contains a `*`.
-
-Note: by default the results appear in the directory where `nextflow run` is executed. To cheange this location, use `--exportDir`.
+- by default the results appear in the directory where `nextflow run` is executed. To cheange this location, use `--exportDir`.
 
 Some useful options:
 - `--paramName <paramValue>...`: to provide parameters (the list of parameters is available in [main.nf](main.nf))
