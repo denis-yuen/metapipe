@@ -3,6 +3,8 @@ process PreProcessReads {
 
   container "preprocess-reads:${workflow.manifest.version}"
 
+  ext.slices = 1
+
   input:
     path input, stageAs: 'in/*'
 

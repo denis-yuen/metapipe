@@ -7,6 +7,8 @@ process DiamondProc {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/diamond:0.9.31'
   containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
 
+  memory = '8 GB'
+
   input:
     val refdb
     tuple DATUM, path(input, stageAs: 'in/*')

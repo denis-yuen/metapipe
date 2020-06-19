@@ -16,7 +16,7 @@ workflow FunctionalAssignment {
     Priam(cds)
     Diamond(cds)
     Interproscan(cds)
-    export_ch = Diamond.out.mix(Priam.out, Interproscan.out)
+    export_ch = Diamond.out.mix(Priam.out, Interproscan.out) | collect
 
   emit:
     export = export_ch

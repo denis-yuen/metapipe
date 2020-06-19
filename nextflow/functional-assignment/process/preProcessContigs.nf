@@ -5,6 +5,8 @@ process PreProcessContigs {
 
   container "preprocess-contigs:${workflow.manifest.version}"
 
+  ext.slices = 1
+
   input:
     path contigs, stageAs: 'in/*'
 

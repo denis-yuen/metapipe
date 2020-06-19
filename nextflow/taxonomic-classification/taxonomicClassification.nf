@@ -9,7 +9,7 @@ workflow TaxonomicClassification {
   main:
     Kaiju(filtered)
     Mapseq(pred16s)
-    export_ch = Kaiju.out.mix(Mapseq.out)
+    export_ch = Kaiju.out.mix(Mapseq.out) | collect
 
   emit:
     kaiju = Kaiju.out

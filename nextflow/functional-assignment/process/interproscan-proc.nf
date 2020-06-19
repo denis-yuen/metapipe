@@ -5,6 +5,11 @@ process InterproscanProc {
   container 'registry.gitlab.com/uit-sfb/genomic-tools/interproscan:5.42-78.0'
   containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
 
+  ext.toolsCpu = 1
+  ext.precalcService = ''
+
+  memory = '4 GB'
+
   input:
     val refdb
     tuple DATUM, path(input, stageAs: 'in/*')
