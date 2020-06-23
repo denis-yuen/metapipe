@@ -1,8 +1,10 @@
+params.refdbDir = '${baseDir}/refdb'
+
 process KaijuProc {
   label 'taxonomic_classification'
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/kaiju:1.7.3'
-  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
+  containerOptions = "-v ${params.refdbDir}:/refdb"
   memory { "$dbsize".toLong().B + 4.GB }
 
   input:

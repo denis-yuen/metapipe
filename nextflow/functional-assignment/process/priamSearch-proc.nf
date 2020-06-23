@@ -1,9 +1,11 @@
+params.refdbDir = '${baseDir}/refdb'
+
 process PriamSearchProc {
   label 'functional_assignment'
   tag "$DATUM"
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/priamsearch:2.0'
-  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
+  containerOptions = "-v ${params.refdbDir}:/refdb"
 
   input:
     val refdb

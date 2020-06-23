@@ -1,9 +1,9 @@
 include {PreProcessContigs} from './process/preProcessContigs.nf' params(contigsCutoff: params.contigsCutoff)
 include {Mga} from './process/mga.nf'
 include {GeneExtractor} from './process/geneExtractor.nf' params(removeIncompleteGenes: params.functionalAnnotation_removeIncompleteGenes)
-include {Priam} from './priam.nf' params(refdb: params.priam_refdb, metapipeDir: params.metapipeDir)
-include {Diamond} from './diamond.nf' params(refdb: params.diamond_refdb, sensitivity: params.diamond_sensitivity, metapipeDir: params.metapipeDir)
-include {Interproscan} from './interproscan.nf' params(refdb: params.interpro_refdb, metapipeDir: params.metapipeDir)
+include {Priam} from './priam.nf' params(refdb: params.priam_refdb, refdbDir: params.refdbDir)
+include {Diamond} from './diamond.nf' params(refdb: params.diamond_refdb, sensitivity: params.diamond_sensitivity, refdbDir: params.refdbDir)
+include {Interproscan} from './interproscan.nf' params(refdb: params.interpro_refdb, refdbDir: params.refdbDir)
 
 workflow FunctionalAssignment {
   take:

@@ -1,3 +1,4 @@
+params.refdbDir = '${baseDir}/refdb'
 params.refdb = 'diamond-marref-proteins:4'
 
 include {DownloadRefDb} from '../helper/downloadRefDb.nf'
@@ -8,7 +9,7 @@ workflow Diamond {
     input
 
   main:
-    refdb = DownloadRefDb(params.refdb)
+    refdb = DownloadRefDb(params.refdb).out.dbPath
     diamond_ch = DiamondProc(refdb, input) | collectFile()
 
   emit:

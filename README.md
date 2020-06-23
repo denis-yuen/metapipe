@@ -46,7 +46,7 @@ Note that the quotes are compulsory if the glob contains a `*`.
 - by default the results appear in the directory where `nextflow run` is executed. To cheange this location, use `--exportDir`.
 
 Some useful options:
-- `--paramName <paramValue>...`: to provide parameters (the list of parameters is available in [main.nf](main.nf))
+- `--paramName <paramValue>...`: to provide parameters (the list of parameters is available in [metapipe.nf](nextflow/metapipe.nf))
 - `-c <configFile>`: to provide config file (overlayed on top of [nextflow.config](nextflow.config))
 - `-resume`: to use cached results
 - `-with-trace`: to generate a trace (text)

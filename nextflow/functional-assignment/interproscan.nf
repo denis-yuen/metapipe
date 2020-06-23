@@ -1,3 +1,4 @@
+params.refdbDir = '${baseDir}/refdb'
 params.refdb = 'interpro:5.42-78.0'
 
 include {DownloadRefDb} from '../helper/downloadRefDb.nf'
@@ -8,7 +9,7 @@ workflow Interproscan {
     input
 
   main:
-    refdb = DownloadRefDb(params.refdb)
+    refdb = DownloadRefDb(params.refdb).out.dbPath
     interpro_ch = InterproscanProc(refdb, input) | collectFile()
 
   emit:

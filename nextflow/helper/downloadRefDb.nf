@@ -4,13 +4,14 @@ process DownloadRefDb {
   label 'helper'
 
   container "ref-db:${workflow.manifest.version}"
-  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
+  containerOptions = "-v !{params.refdbDir}:/refdb"
 
   input:
     val refDb
 
   output:
-    env refdbPath
+    env dbPath, emit: dbPath
+    env extDbPath, emit: extDbPath
 
   shell:
     '''
@@ -32,8 +33,9 @@ process DownloadRefDb {
     if [[ -z $MEMORY ]]; then
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
-    refdbPath="!{params.refdbDir}/$DB_NAME/$DB_VERSION"
+    dbPath="/refdb/$DB_NAME/$DB_VERSION"
+    extDbPath="!{refdbDir}/$DB_NAME/$DB_VERSION"
     set -x
-    /opt/docker/bin/ref-db -J-Xms$MEMORY $XMX_FLAG -- download -d !{params.refdbDir} ${DB_NAME}=${DB_VERSION}
+    /opt/docker/bin/ref-db -J-Xms$MEMORY $XMX_FLAG -- download -d /refdb ${DB_NAME}=${DB_VERSION}
     '''
 }

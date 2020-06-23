@@ -2,7 +2,7 @@
  * Default pipeline parameters. They can be overridden on the command line eg.
  * given `params.foo` specify on the run command line `--foo some_value`.
  */
-params.metapipeDir = "/home/.metapipe"
+params.refdbDir = "${baseDir}/refdb"
 params.exportDir = "."
 params.reads = "${baseDir}/test/resources/datasets/default_reads_fastq/{forward,reverse}.fastq*"
 params.readsCutoff = 75
@@ -18,7 +18,7 @@ params.priam_refdb = 'priam:JAN18'
 log.info """
  M E T A P I P E
  ===================================
- metapipeDir: ${params.metapipeDir}
+ refdbDir: ${params.refdbDir}
  exportDir: ${params.exportDir}
  reads: ${params.reads}
  readsCutoff: ${params.readsCutoff}

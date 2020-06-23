@@ -1,3 +1,4 @@
+params.refdbDir = '${baseDir}/refdb'
 params.sensitivity = 'sensitive'
 
 process DiamondProc {
@@ -5,7 +6,7 @@ process DiamondProc {
   tag "$DATUM"
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/diamond:0.9.31'
-  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
+  containerOptions = "-v ${params.refdbDir}:/refdb"
 
   memory = '4 GB'
 

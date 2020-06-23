@@ -1,8 +1,10 @@
+params.refdbDir = '${baseDir}/refdb'
+
 process MapseqProc {
   label 'taxonomic_classification'
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/mapseq:1.2.6'
-  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
+  containerOptions = "-v ${params.refdbDir}:/refdb"
 
   input:
     val refdb

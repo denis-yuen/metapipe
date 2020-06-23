@@ -1,5 +1,5 @@
-include {Kaiju} from './kaiju.nf' params(refdb: params.kaiju_refdb, metapipeDir: params.metapipeDir)
-include {Mapseq} from './mapseq.nf' params(refdb: params.mapseq_refdb, metapipeDir: params.metapipeDir)
+include {Kaiju} from './kaiju.nf' params(refdb: params.kaiju_refdb, refdbDir: params.refdbDir)
+include {Mapseq} from './mapseq.nf' params(refdb: params.mapseq_refdb, refdbDir: params.refdbDir)
 
 workflow TaxonomicClassification {
   take:

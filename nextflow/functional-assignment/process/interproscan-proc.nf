@@ -1,9 +1,11 @@
+params.refdbDir = '${baseDir}/refdb'
+
 process InterproscanProc {
   label 'functional_assignment'
   tag "$DATUM"
 
   container 'registry.gitlab.com/uit-sfb/genomic-tools/interproscan:5.42-78.0'
-  containerOptions = "-v ${params.metapipeDir}/refdb:/refdb"
+  containerOptions = "-v ${params.refdbDir}:/refdb"
 
   ext.toolsCpu = 1
   ext.precalcService = ''

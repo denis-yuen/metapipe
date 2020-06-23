@@ -1,6 +1,7 @@
 **/.idea/
 *.iml
 **/target/
+refdb/
 **/work/
 **/.nexflow/
 .nextflow.log*
