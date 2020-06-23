@@ -1,4 +1,4 @@
-params.refdbDir = '${baseDir}/refdb'
+params.refdbDir = "${baseDir}/refdb"
 params.sensitivity = 'sensitive'
 
 process DiamondProc {

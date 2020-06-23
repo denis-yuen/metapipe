@@ -1,7 +1,7 @@
-params.refdbDir = '${baseDir}/refdb'
+params.refdbDir = "${baseDir}/refdb"
 params.refdb = 'silvamar:4'
 
-include {DownloadRefDb} from '../helper/downloadRefDb.nf'
+include {DownloadRefDb} from '../helper/downloadRefDb.nf' params(refdbDir: params.refdbDir)
 include {MapseqProc} from './process/mapseq-proc.nf'
 
 workflow Mapseq {
@@ -9,7 +9,8 @@ workflow Mapseq {
     input
 
   main:
-    refdb = DownloadRefDb(params.refdb).out.dbPath
+    DownloadRefDb(params.refdb)
+    refdb = DownloadRefDb.out.dbPath
     MapseqProc(refdb, input)
 
   emit:
