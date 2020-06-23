@@ -1,4 +1,4 @@
-params.refdbDir = '${baseDir}/refdb'
+params.refdbDir = "${baseDir}/refdb"
 
 process MapseqProc {
   label 'taxonomic_classification'

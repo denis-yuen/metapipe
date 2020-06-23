@@ -1,10 +1,10 @@
-params.refdbDir = '/refdb'
+params.refdbDir = "${baseDir}/refdb"
 
 process DownloadRefDb {
   label 'helper'
 
   container "ref-db:${workflow.manifest.version}"
-  containerOptions = "-v !{params.refdbDir}:/refdb"
+  containerOptions = "-v ${params.refdbDir}:/refdb"
 
   input:
     val refDb
@@ -34,7 +34,7 @@ process DownloadRefDb {
       XMX_FLAG="-J-Xmx$MEMORY"
     fi
     dbPath="/refdb/$DB_NAME/$DB_VERSION"
-    extDbPath="!{refdbDir}/$DB_NAME/$DB_VERSION"
+    extDbPath="!{params.refdbDir}/$DB_NAME/$DB_VERSION"
     set -x
     /opt/docker/bin/ref-db -J-Xms$MEMORY $XMX_FLAG -- download -d /refdb ${DB_NAME}=${DB_VERSION}
     '''

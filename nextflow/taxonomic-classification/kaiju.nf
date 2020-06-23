@@ -1,7 +1,7 @@
-params.refdbDir = '${baseDir}/refdb'
+params.refdbDir = "${baseDir}/refdb"
 params.refdb = 'kaiju-mardb:1.7.2'
 
-include {DownloadRefDb} from '../helper/downloadRefDb.nf'
+include {DownloadRefDb} from '../helper/downloadRefDb.nf' params(refdbDir: params.refdbDir)
 include {KaijuProc} from './process/kaiju-proc.nf'
 
 def mem(refdb) {
@@ -13,7 +13,8 @@ workflow Kaiju {
     input
 
   main:
-    dbsize = DownloadRefDb(params.refdb).out.extDbPath.map{path -> mem(path)}
+    DownloadRefDb(params.refdb)
+    dbsize = DownloadRefDb.out.extDbPath.map{path -> mem(path)}
     KaijuProc(DownloadRefDb.out.dbPath, input, dbsize)
 
   emit:

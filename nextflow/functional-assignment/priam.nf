@@ -1,7 +1,7 @@
-params.refdbDir = '${baseDir}/refdb'
+params.refdbDir = "${baseDir}/refdb"
 params.refdb = 'priam:JAN18'
 
-include {DownloadRefDb} from '../helper/downloadRefDb.nf'
+include {DownloadRefDb} from '../helper/downloadRefDb.nf' params(refdbDir: params.refdbDir)
 include {PriamSearchProc} from './process/priamSearch-proc.nf'
 
 workflow Priam {
@@ -9,7 +9,8 @@ workflow Priam {
     input
 
   main:
-    refdb = DownloadRefDb(params.refdb).out.dbPath
+    DownloadRefDb(params.refdb)
+    refdb = DownloadRefDb.out.dbPath
     PriamSearchProc(refdb, input)
     genomeECs = PriamSearchProc.out.genomeECs | collectFile()
     genomeEnzymes = PriamSearchProc.out.genomeEnzymes | collectFile()

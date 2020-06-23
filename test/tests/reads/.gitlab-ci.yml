@@ -9,6 +9,6 @@ test reads:
 
   script:
     - mkdir -p target && cd target
-    - nextflow run .. -c ../test/tests/reads/nextflow.config --refdb /home/.metapipe/refdb -with-trace || true #We still want to run the output check even if the pipeline failed
+    - nextflow run .. -c ../test/tests/reads/nextflow.config --refdbDir /home/.metapipe/refdb -with-trace || true #We still want to run the output check even if the pipeline failed
     - cat trace.txt
     - docker run --rm -v $(pwd):/workdir -v $(pwd)/../test/tests/reads/rules.tsv:/rules.tsv registry.gitlab.com/uit-sfb/nextflow-output-check/nextflow-output-check:0.1.0-SNPASHOT -- check-rules --workdir /workdir --rules /rules.tsv
